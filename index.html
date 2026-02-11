@@ -12,6 +12,7 @@
             background: black;
             color: white;
             overflow-x: hidden;
+            cursor: none;
         }
 
         canvas {
@@ -19,6 +20,36 @@
             top: 0;
             left: 0;
             z-index: -1;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        nav h2 {
+            margin: 0;
+            background: linear-gradient(90deg,#00f2ff,#8e2de2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00f2ff;
         }
 
         section {
@@ -33,39 +64,17 @@
 
         h1 {
             font-size: 70px;
-            background: linear-gradient(90deg, #00f2ff, #8e2de2);
+            background: linear-gradient(90deg,#00f2ff,#8e2de2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        p {
-            max-width: 600px;
-            opacity: 0.8;
-            font-size: 18px;
-        }
-
-        button {
-            margin-top: 25px;
-            padding: 15px 40px;
-            font-size: 18px;
-            border: none;
-            border-radius: 30px;
-            background: linear-gradient(90deg, #00f2ff, #8e2de2);
-            color: white;
-            cursor: pointer;
-            transition: 0.4s;
-        }
-
-        button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px #00f2ff;
-        }
-
+        /* FEATURE CARDS */
         .features {
             display: flex;
+            gap: 30px;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
         }
 
         .card {
@@ -81,17 +90,36 @@
             transform: translateY(-10px);
             box-shadow: 0 0 20px #8e2de2;
         }
+
+        /* CUSTOM CURSOR */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00f2ff;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: 0.1s;
+        }
     </style>
 </head>
 
 <body>
 
-<section>
+<nav>
+    <h2>ORXA</h2>
+    <div>
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+    </div>
+</nav>
+
+<div class="cursor" id="cursor"></div>
+
+<section id="home">
     <h1>ORXA</h1>
     <p>The Future of Intelligent Interaction</p>
-    <button onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
-        Explore More
-    </button>
 </section>
 
 <section id="features">
@@ -99,26 +127,28 @@
     <div class="features">
         <div class="card">
             <h3>AI Powered</h3>
-            <p>Advanced intelligence ready to assist you instantly.</p>
+            <p>Advanced intelligence ready to assist instantly.</p>
         </div>
         <div class="card">
-            <h3>Smart Responses</h3>
-            <p>Understands context and delivers accurate replies.</p>
+            <h3>Smart Thinking</h3>
+            <p>Context-aware and adaptive responses.</p>
         </div>
         <div class="card">
-            <h3>Fast & Secure</h3>
-            <p>Lightning speed performance with top security.</p>
+            <h3>Secure & Fast</h3>
+            <p>Built for speed with strong protection.</p>
         </div>
     </div>
 </section>
 
 <script>
+    // THREE JS SCENE
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
+    // PARTICLES
     const particlesGeometry = new THREE.BufferGeometry();
     const particlesCount = 2000;
     const posArray = new Float32Array(particlesCount * 3);
@@ -128,32 +158,33 @@
     }
 
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-    const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.02,
-        color: 0x00f2ff
-    });
-
+    const particlesMaterial = new THREE.PointsMaterial({ size: 0.02, color: 0x00f2ff });
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particlesMesh);
+
+    // 3D ORB
+    const geometry = new THREE.SphereGeometry(0.5, 32, 32);
+    const material = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x8e2de2 });
+    const sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+
     camera.position.z = 3;
-
-    let mouseX = 0;
-    let mouseY = 0;
-
-    document.addEventListener('mousemove', (event) => {
-        mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
-    });
 
     function animate() {
         requestAnimationFrame(animate);
-        particlesMesh.rotation.y += 0.001 + mouseX * 0.002;
-        particlesMesh.rotation.x += 0.001 + mouseY * 0.002;
+        particlesMesh.rotation.y += 0.001;
+        sphere.rotation.y += 0.01;
+        sphere.rotation.x += 0.005;
         renderer.render(scene, camera);
     }
-
     animate();
+
+    // CURSOR
+    const cursor = document.getElementById("cursor");
+    document.addEventListener("mousemove", e => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+    });
 
     window.addEventListener('resize', () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
