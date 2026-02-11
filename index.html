@@ -1,164 +1,195 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ORXA AI</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<title>ORXA AI</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: black;
-            color: white;
-            overflow: hidden;
-            cursor: none;
-        }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
 
-        /* LOADING SCREEN */
-        #loader {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 9999;
-            transition: opacity 1s ease;
-        }
+body{
+background:#000;
+color:white;
+font-family:Arial, sans-serif;
+overflow-x:hidden;
+}
 
-        #loader h1 {
-            font-size: 40px;
-            background: linear-gradient(90deg,#00f2ff,#8e2de2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: blink 1.5s infinite;
-        }
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-2;
+}
 
-        @keyframes blink {
-            0% {opacity: 1;}
-            50% {opacity: 0.4;}
-            100% {opacity: 1;}
-        }
+#particles{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-3;
+}
 
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-        }
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:20px;
+display:flex;
+justify-content:space-between;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(10px);
+z-index:10;
+}
 
-        nav h2 {
-            margin: 0;
-            background: linear-gradient(90deg,#00f2ff,#8e2de2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+nav h2{
+color:#00f0ff;
+}
 
-        section {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-        }
+section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px;
+}
 
-        h1 {
-            font-size: 70px;
-            background: linear-gradient(90deg,#00f2ff,#8e2de2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+.hero h1{
+font-size:60px;
+background:linear-gradient(90deg,#00f0ff,#ff00ff);
+-webkit-background-clip:text;
+color:transparent;
+}
 
-        .cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #00f2ff;
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-        }
-    </style>
+.hero p{
+margin-top:20px;
+font-size:18px;
+opacity:0.8;
+}
+
+.cards{
+display:flex;
+gap:30px;
+margin-top:50px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(15px);
+padding:30px;
+border-radius:20px;
+width:250px;
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 20px #00f0ff;
+}
+
+.orb-container{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+z-index:-1;
+}
+
+.glow{
+animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+0%{filter:drop-shadow(0 0 5px #ff00ff);}
+50%{filter:drop-shadow(0 0 25px #ff00ff);}
+100%{filter:drop-shadow(0 0 5px #ff00ff);}
+}
+
+</style>
 </head>
 
 <body>
 
-<div id="loader">
-    <h1>Initializing ORXA...</h1>
-</div>
+<div id="particles"></div>
 
 <nav>
-    <h2>ORXA</h2>
+<h2>ORXA</h2>
 </nav>
 
-<div class="cursor" id="cursor"></div>
+<section class="hero">
+<div class="orb-container glow" id="orb"></div>
+<h1>ORXA AI</h1>
+<p>The Future of Intelligent Interaction</p>
+</section>
 
 <section>
-    <h1>ORXA</h1>
-    <p>The Future of Intelligent Interaction</p>
+<h1>About ORXA</h1>
+<p>ORXA is a next-generation AI interface blending immersive 3D visuals and intelligent interaction.</p>
+</section>
+
+<section>
+<h1>Core Features</h1>
+<div class="cards">
+<div class="card">
+<h3>AI Powered</h3>
+<p>Advanced intelligence engine.</p>
+</div>
+<div class="card">
+<h3>Immersive 3D</h3>
+<p>Interactive particle system & visuals.</p>
+</div>
+<div class="card">
+<h3>Fast & Secure</h3>
+<p>Optimized performance with secure backend ready.</p>
+</div>
+</div>
 </section>
 
 <script>
-    // LOADER FADE
-    window.addEventListener("load", () => {
-        setTimeout(() => {
-            document.getElementById("loader").style.opacity = "0";
-            setTimeout(() => {
-                document.getElementById("loader").style.display = "none";
-                document.body.style.overflow = "auto";
-            }, 1000);
-        }, 2000);
-    });
+tsParticles.load("particles",{
+particles:{
+number:{value:80},
+color:{value:"#00f0ff"},
+links:{enable:true,color:"#00f0ff"},
+move:{enable:true,speed:1}
+}
+});
 
-    // THREE JS
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+const renderer=new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
+document.getElementById("orb").appendChild(renderer.domElement);
 
-    const geometry = new THREE.SphereGeometry(0.5, 32, 32);
-    const material = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x8e2de2 });
-    const sphere = new THREE.Mesh(geometry, material);
-    scene.add(sphere);
+const geometry=new THREE.SphereGeometry(2,64,64);
+const material=new THREE.MeshBasicMaterial({color:0xff00ff,wireframe:true});
+const sphere=new THREE.Mesh(geometry,material);
+scene.add(sphere);
 
-    camera.position.z = 3;
+camera.position.z=5;
 
-    function animate() {
-        requestAnimationFrame(animate);
-        sphere.rotation.y += 0.01;
-        sphere.rotation.x += 0.005;
-        renderer.render(scene, camera);
-    }
-    animate();
+function animate(){
+requestAnimationFrame(animate);
+sphere.rotation.x+=0.01;
+sphere.rotation.y+=0.01;
+renderer.render(scene,camera);
+}
+animate();
 
-    // CURSOR
-    const cursor = document.getElementById("cursor");
-    document.addEventListener("mousemove", e => {
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
-    });
-
-    window.addEventListener('resize', () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.aspect = window.innerWidth/window.innerHeight;
-        camera.updateProjectionMatrix();
-    });
+window.addEventListener("resize",()=>{
+renderer.setSize(window.innerWidth,window.innerHeight);
+camera.aspect=window.innerWidth/window.innerHeight;
+camera.updateProjectionMatrix();
+});
 </script>
 
 </body>
