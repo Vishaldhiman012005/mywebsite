@@ -91,11 +91,20 @@
     scene.add(particlesMesh);
 
     camera.position.z = 3;
+    let mouseX = 0;
+let mouseY = 0;
+
+document.addEventListener('mousemove', (event) => {
+    mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
+});
+
 
     function animate() {
         requestAnimationFrame(animate);
-        particlesMesh.rotation.y += 0.001;
-        particlesMesh.rotation.x += 0.001;
+        particlesMesh.rotation.y += 0.001 + mouseX * 0.002;
+        particlesMesh.rotation.x += 0.001 + mouseY * 0.002;
+
         renderer.render(scene, camera);
     }
 
@@ -110,3 +119,4 @@
 
 </body>
 </html>
+
