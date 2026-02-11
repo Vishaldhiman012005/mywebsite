@@ -9,10 +9,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
-body{background:#000;overflow-x:hidden;color:white;}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Orbitron',sans-serif;
+}
 
-/* --- GLASS NAVBAR --- */
+body{
+    background:#000;
+    overflow-x:hidden;
+    color:white;
+}
+
+/* NAVBAR */
 nav{
     position:fixed;
     width:100%;
@@ -20,18 +30,33 @@ nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    z-index:100;
+    z-index:10;
     background:rgba(0,0,0,0.4);
     backdrop-filter:blur(15px);
     border-bottom:1px solid rgba(0,247,255,0.2);
 }
 
-nav h1{color:#00f7ff;letter-spacing:2px;}
-nav ul{list-style:none;display:flex;gap:30px;}
-nav ul li{cursor:pointer;transition:0.3s;}
-nav ul li:hover{color:#00f7ff;}
+nav h1{
+    color:#00f7ff;
+    letter-spacing:2px;
+}
 
-/* --- HERO SECTION --- */
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:30px;
+}
+
+nav ul li{
+    cursor:pointer;
+    transition:0.3s;
+}
+
+nav ul li:hover{
+    color:#00f7ff;
+}
+
+/* HERO SECTION */
 .hero{
     height:100vh;
     display:flex;
@@ -39,11 +64,9 @@ nav ul li:hover{color:#00f7ff;}
     align-items:center;
     text-align:center;
     position:relative;
-    overflow:hidden;
 }
 
 .hero-content{
-    position:absolute;
     z-index:2;
 }
 
@@ -72,15 +95,17 @@ nav ul li:hover{color:#00f7ff;}
     transition:0.3s;
 }
 
-.btn:hover{background:#fff;}
+.btn:hover{
+    background:#fff;
+}
 
-/* --- MOUSE-REACTIVE SPHERE --- */
+/* GLOWING SPHERE */
 .sphere{
     position:absolute;
-    top:50%;
-    left:50%;
-    width:200px;
-    height:200px;
+    right:10%;
+    bottom:10%;
+    width:250px;
+    height:250px;
     border-radius:50%;
     background:radial-gradient(circle at 30% 30%, #ff00ff, #6a00ff);
     box-shadow:0 0 60px #ff00ff, 0 0 120px #6a00ff;
@@ -88,17 +113,16 @@ nav ul li:hover{color:#00f7ff;}
     z-index:1;
     pointer-events:none;
     mix-blend-mode:screen;
-    opacity:0.4;
-    transform: translate(-50%, -50%);
+    opacity:0.5;
 }
 
 @keyframes float{
-    0%{transform:translate(-50%, -50%) translateY(0px);}
-    50%{transform:translate(-50%, -50%) translateY(-15px);}
-    100%{transform:translate(-50%, -50%) translateY(0px);}
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-20px);}
+    100%{transform:translateY(0px);}
 }
 
-/* --- ABOUT SECTION --- */
+/* ABOUT SECTION */
 .about{
     padding:100px 50px;
     text-align:center;
@@ -126,13 +150,11 @@ nav ul li:hover{color:#00f7ff;}
     line-height:1.6;
 }
 
-/* --- PARTICLES BACKGROUND --- */
+/* PARTICLES BACKGROUND */
 #particles-js{
     position:fixed;
     width:100%;
     height:100%;
-    top:0;
-    left:0;
     z-index:0;
 }
 </style>
@@ -140,10 +162,8 @@ nav ul li:hover{color:#00f7ff;}
 
 <body>
 
-<!-- PARTICLES -->
 <div id="particles-js"></div>
 
-<!-- NAVBAR -->
 <nav>
     <h1>ORXA</h1>
     <ul>
@@ -154,7 +174,6 @@ nav ul li:hover{color:#00f7ff;}
     </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
     <div class="hero-content">
         <h2>Future of AI Interface</h2>
@@ -164,7 +183,6 @@ nav ul li:hover{color:#00f7ff;}
     <div class="sphere"></div>
 </section>
 
-<!-- ABOUT -->
 <section class="about">
     <h2>About ORXA</h2>
     <p>
@@ -176,29 +194,24 @@ nav ul li:hover{color:#00f7ff;}
 
 <!-- PARTICLES JS -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
 <script>
 particlesJS("particles-js", {
   "particles": {
-    "number": { "value": 60, "density":{"enable":true,"value_area":800} },
+    "number": { "value": 80 },
     "color": { "value": "#00f7ff" },
     "shape": { "type": "circle" },
-    "opacity": { "value": 0.3, "random":true },
-    "size": { "value": 3, "random":true },
+    "opacity": { "value": 0.5 },
+    "size": { "value": 3 },
     "line_linked": {
       "enable": true,
       "distance": 150,
       "color": "#00f7ff",
-      "opacity": 0.2,
+      "opacity": 0.4,
       "width": 1
     },
-    "move": { "enable": true, "speed": 1.5, "random":true }
-  },
-  "interactivity": {
-    "detect_on":"canvas",
-    "events":{"onhover":{"enable":true,"mode":"repulse"},"onclick":{"enable":true,"mode":"push"},"resize":true},
-    "modes":{"repulse":{"distance":100},"push":{"particles_nb":4}}
-  },
-  "retina_detect":true
+    "move": { "enable": true, "speed": 2 }
+  }
 });
 </script>
 
@@ -208,9 +221,9 @@ document.addEventListener("mousemove", function(e){
     const sphere = document.querySelector(".sphere");
     const centerX = window.innerWidth/2;
     const centerY = window.innerHeight/2;
-    const offsetX = (e.clientX - centerX)/40; // subtle movement
+    const offsetX = (e.clientX - centerX)/40;
     const offsetY = (e.clientY - centerY)/40;
-    sphere.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
+    sphere.style.transform = `translate(calc(${offsetX}px), calc(${offsetY}px))`;
 });
 
 // --- SCROLL REVEAL ---
