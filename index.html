@@ -9,18 +9,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Orbitron',sans-serif;
-}
-
-body{
-    background:#000;
-    overflow-x:hidden;
-    color:white;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+body{background:#000;overflow-x:hidden;color:white;}
+canvas{display:block;position:fixed;top:0;left:0;z-index:0;}
 
 /* --- GLASS NAVBAR --- */
 nav{
@@ -36,25 +27,10 @@ nav{
     border-bottom:1px solid rgba(0,247,255,0.2);
 }
 
-nav h1{
-    color:#00f7ff;
-    letter-spacing:2px;
-}
-
-nav ul{
-    list-style:none;
-    display:flex;
-    gap:30px;
-}
-
-nav ul li{
-    cursor:pointer;
-    transition:0.3s;
-}
-
-nav ul li:hover{
-    color:#00f7ff;
-}
+nav h1{color:#00f7ff;letter-spacing:2px;}
+nav ul{list-style:none;display:flex;gap:30px;}
+nav ul li{cursor:pointer;transition:0.3s;}
+nav ul li:hover{color:#00f7ff;}
 
 /* --- HERO SECTION --- */
 .hero{
@@ -65,9 +41,11 @@ nav ul li:hover{
     text-align:center;
     position:relative;
     overflow:hidden;
+    z-index:1;
 }
 
 .hero-content{
+    position:absolute;
     z-index:2;
 }
 
@@ -96,33 +74,7 @@ nav ul li:hover{
     transition:0.3s;
 }
 
-.btn:hover{
-    background:#fff;
-}
-
-/* --- MOUSE-REACTIVE SPHERE --- */
-.sphere{
-    position:absolute;
-    top:50%;
-    left:50%;
-    width:250px;
-    height:250px;
-    border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, #ff00ff, #6a00ff);
-    box-shadow:0 0 60px #ff00ff, 0 0 120px #6a00ff;
-    animation:float 4s ease-in-out infinite;
-    z-index:1;
-    pointer-events:none;
-    mix-blend-mode:screen;
-    opacity:0.4;
-    transform: translate(-50%, -50%);
-}
-
-@keyframes float{
-    0%{transform:translate(-50%, -50%) translateY(0px);}
-    50%{transform:translate(-50%, -50%) translateY(-20px);}
-    100%{transform:translate(-50%, -50%) translateY(0px);}
-}
+.btn:hover{background:#fff;}
 
 /* --- ABOUT SECTION --- */
 .about{
@@ -151,22 +103,10 @@ nav ul li:hover{
     color:#aaa;
     line-height:1.6;
 }
-
-/* --- PARTICLES BACKGROUND --- */
-#particles-js{
-    position:fixed;
-    width:100%;
-    height:100%;
-    z-index:0;
-}
-
 </style>
 </head>
 
 <body>
-
-<!-- PARTICLES -->
-<div id="particles-js"></div>
 
 <!-- NAVBAR -->
 <nav>
@@ -186,7 +126,6 @@ nav ul li:hover{
         <p>ORXA blends immersive 3D visuals with intelligent interaction.</p>
         <button class="btn">Explore Now</button>
     </div>
-    <div class="sphere"></div>
 </section>
 
 <!-- ABOUT -->
@@ -199,46 +138,76 @@ nav ul li:hover{
     </p>
 </section>
 
-<!-- PARTICLES JS -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<!-- THREE.JS -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 <script>
-particlesJS("particles-js", {
-  "particles": {
-    "number": { "value": 80, "density":{"enable":true,"value_area":800} },
-    "color": { "value": "#00f7ff" },
-    "shape": { "type": "circle" },
-    "opacity": { "value": 0.3, "random":true },
-    "size": { "value": 3, "random":true },
-    "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#00f7ff",
-      "opacity": 0.2,
-      "width": 1
-    },
-    "move": { "enable": true, "speed": 2, "random":true }
-  },
-  "interactivity": {
-    "detect_on":"canvas",
-    "events":{"onhover":{"enable":true,"mode":"repulse"},"onclick":{"enable":true,"mode":"push"},"resize":true},
-    "modes":{"repulse":{"distance":100},"push":{"particles_nb":4}}
-  },
-  "retina_detect":true
-});
-</script>
+let scene, camera, renderer, nodes=[], nodeCount=150, group;
 
-<script>
-// --- MOUSE-REACTIVE SPHERE ---
-document.addEventListener("mousemove", function(e){
-    const sphere = document.querySelector(".sphere");
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-    const offsetX = (e.clientX - centerX) / 30; // adjust divisor for movement intensity
-    const offsetY = (e.clientY - centerY) / 30;
-    sphere.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
+function init(){
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+    camera.position.z = 50;
+
+    renderer = new THREE.WebGLRenderer({alpha:true, antialias:true});
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    group = new THREE.Group();
+    scene.add(group);
+
+    // Create nodes
+    for(let i=0;i<nodeCount;i++){
+        let geometry = new THREE.SphereGeometry(0.5,8,8);
+        let material = new THREE.MeshBasicMaterial({color:0x00f7ff});
+        let node = new THREE.Mesh(geometry,material);
+        node.position.set(
+            (Math.random()-0.5)*50,
+            (Math.random()-0.5)*50,
+            (Math.random()-0.5)*50
+        );
+        nodes.push(node);
+        group.add(node);
+    }
+
+    // Lines between nodes
+    for(let i=0;i<nodeCount;i++){
+        for(let j=i+1;j<nodeCount;j++){
+            let material = new THREE.LineBasicMaterial({color:0x00f7ff,opacity:0.1,transparent:true});
+            let geometry = new THREE.BufferGeometry().setFromPoints([nodes[i].position,nodes[j].position]);
+            let line = new THREE.Line(geometry,material);
+            scene.add(line);
+        }
+    }
+
+    window.addEventListener('resize', onWindowResize, false);
+}
+
+function onWindowResize(){
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+}
+
+function animate(){
+    requestAnimationFrame(animate);
+    group.rotation.y += 0.001;
+    group.rotation.x += 0.0005;
+    renderer.render(scene,camera);
+}
+
+init();
+animate();
+
+// Mouse interaction to rotate group
+document.addEventListener("mousemove",(e)=>{
+    let mouseX = (e.clientX - window.innerWidth/2)/100;
+    let mouseY = (e.clientY - window.innerHeight/2)/100;
+    group.rotation.y = mouseX;
+    group.rotation.x = mouseY;
 });
 
-// --- SCROLL REVEAL ---
+// Scroll reveal
 window.addEventListener("scroll", ()=>{
     const about = document.querySelector(".about");
     const position = about.getBoundingClientRect().top;
