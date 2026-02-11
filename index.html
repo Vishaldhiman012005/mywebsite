@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ORXA AI</title>
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -18,30 +17,39 @@
 
 body{
     background:#000;
-    overflow-x:hidden;
     color:white;
+    overflow-x:hidden;
 }
 
-/* NAVBAR */
+/* ===== PARTICLES BACKGROUND ===== */
+#particles-js{
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:-1;
+}
+
+/* ===== NAVBAR ===== */
 nav{
     position:fixed;
     width:100%;
-    padding:20px 50px;
+    padding:25px 60px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    z-index:10;
+    z-index:100;
 }
 
 nav h1{
     color:#00f7ff;
-    letter-spacing:2px;
+    font-size:24px;
+    letter-spacing:3px;
 }
 
 nav ul{
     list-style:none;
     display:flex;
-    gap:30px;
+    gap:40px;
 }
 
 nav ul li{
@@ -53,7 +61,7 @@ nav ul li:hover{
     color:#00f7ff;
 }
 
-/* HERO SECTION */
+/* ===== HERO ===== */
 .hero{
     height:100vh;
     display:flex;
@@ -61,84 +69,82 @@ nav ul li:hover{
     align-items:center;
     text-align:center;
     position:relative;
+    padding:0 20px;
 }
 
 .hero-content{
-    z-index:2;
+    z-index:5;
+    max-width:900px;
 }
 
 .hero h2{
-    font-size:50px;
+    font-size:60px;
     margin-bottom:20px;
 }
 
 .hero p{
     font-size:18px;
-    color:#aaa;
-    margin-bottom:30px;
+    color:#bbb;
+    margin-bottom:40px;
 }
 
+/* BUTTON */
 .btn{
-    padding:12px 30px;
-    border:none;
-    background:#00f7ff;
-    color:#000;
-    font-weight:bold;
+    padding:15px 40px;
+    border-radius:40px;
+    border:2px solid #00f7ff;
+    background:transparent;
+    color:#00f7ff;
+    font-weight:600;
     cursor:pointer;
-    border-radius:30px;
-    transition:0.3s;
+    transition:0.4s;
 }
 
 .btn:hover{
-    background:#fff;
+    background:#00f7ff;
+    color:#000;
+    box-shadow:0 0 20px #00f7ff;
 }
 
-/* GLOWING SPHERE */
+/* ===== 3D GLOW SPHERE ===== */
 .sphere{
     position:absolute;
     right:10%;
-    bottom:10%;
-    width:250px;
-    height:250px;
+    width:320px;
+    height:320px;
     border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, #ff00ff, #6a00ff);
-    box-shadow:0 0 60px #ff00ff, 0 0 120px #6a00ff;
-    animation:float 4s ease-in-out infinite;
-    z-index:1;
+    background:radial-gradient(circle at 30% 30%, #ff00ff, #6a00ff, #000);
+    box-shadow:0 0 100px #ff00ff, 0 0 200px #6a00ff;
+    animation:float 6s ease-in-out infinite;
+    filter:blur(1px);
 }
 
 @keyframes float{
     0%{transform:translateY(0px);}
-    50%{transform:translateY(-20px);}
+    50%{transform:translateY(-30px);}
     100%{transform:translateY(0px);}
 }
 
-/* ABOUT SECTION */
+/* ===== ABOUT SECTION ===== */
 .about{
-    padding:100px 50px;
+    padding:150px 40px;
     text-align:center;
-    background:#0a0a0a;
+    backdrop-filter:blur(10px);
+    background:rgba(255,255,255,0.03);
 }
 
 .about h2{
-    font-size:40px;
-    margin-bottom:20px;
+    font-size:45px;
     color:#00f7ff;
+    margin-bottom:20px;
 }
 
 .about p{
     max-width:800px;
     margin:auto;
-    color:#aaa;
-    line-height:1.6;
-}
-
-/* PARTICLES BACKGROUND */
-#particles-js{
-    position:fixed;
-    width:100%;
-    height:100%;
-    z-index:0;
+    color:#ccc;
+    line-height:1.8;
+    font-size:17px;
 }
 
 </style>
@@ -161,7 +167,7 @@ nav ul li:hover{
 <section class="hero">
     <div class="hero-content">
         <h2>Future of AI Interface</h2>
-        <p>ORXA blends immersive 3D visuals with intelligent interaction.</p>
+        <p>ORXA blends immersive 3D visuals with intelligent interaction to redefine digital experience.</p>
         <button class="btn">Explore Now</button>
     </div>
     <div class="sphere"></div>
@@ -170,31 +176,30 @@ nav ul li:hover{
 <section class="about">
     <h2>About ORXA</h2>
     <p>
-        ORXA is a next-generation artificial intelligence platform designed to deliver futuristic digital experiences.
-        With immersive visuals, dynamic 3D environments, and seamless user interaction,
-        ORXA transforms the way users engage with intelligent systems.
+        ORXA is a next-generation artificial intelligence platform delivering immersive digital experiences.
+        Through dynamic 3D environments, advanced UI systems, and seamless interaction,
+        ORXA transforms how users engage with intelligent technology.
     </p>
 </section>
 
-<!-- PARTICLES JS -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 <script>
 particlesJS("particles-js", {
   "particles": {
-    "number": { "value": 80 },
+    "number": { "value": 90 },
     "color": { "value": "#00f7ff" },
     "shape": { "type": "circle" },
-    "opacity": { "value": 0.5 },
+    "opacity": { "value": 0.4 },
     "size": { "value": 3 },
     "line_linked": {
       "enable": true,
       "distance": 150,
       "color": "#00f7ff",
-      "opacity": 0.4,
+      "opacity": 0.2,
       "width": 1
     },
-    "move": { "enable": true, "speed": 2 }
+    "move": { "enable": true, "speed": 1.5 }
   }
 });
 </script>
