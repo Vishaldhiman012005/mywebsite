@@ -3,170 +3,245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORXA - Futuristic AI Startup</title>
+<title>ORXA AI</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
 <style>
-    /* --- Reset & Base --- */
-    *{margin:0;padding:0;box-sizing:border-box;font-family: 'Poppins', sans-serif;}
-    body{background:#0a0a0a;color:#fff;overflow-x:hidden;}
-    a{text-decoration:none;color:inherit;}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Orbitron',sans-serif;
+}
 
-    /* --- Glass Navbar --- */
-    nav{
-        position:fixed;
-        width:100%;
-        padding:20px 60px;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        z-index:100;
-        background:rgba(0,0,0,0.4);
-        backdrop-filter:blur(15px);
-        border-bottom:1px solid rgba(0,247,255,0.2);
-    }
-    nav a{margin:0 15px;font-weight:500;transition:0.3s;}
-    nav a:hover{color:#00f7ff;}
+body{
+    background:#000;
+    overflow-x:hidden;
+    color:white;
+}
 
-    /* --- Hero Section --- */
-    .hero{
-        height:100vh;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        text-align:center;
-        position:relative;
-        overflow:hidden;
-    }
-    .hero h2{
-        font-size:60px;
-        background:linear-gradient(90deg,#00f7ff,#ff00ff);
-        -webkit-background-clip:text;
-        -webkit-text-fill-color:transparent;
-        margin-bottom:20px;
-    }
-    .hero p{
-        font-size:20px;
-        color:#aaa;
-        max-width:600px;
-    }
+/* --- GLASS NAVBAR --- */
+nav{
+    position:fixed;
+    width:100%;
+    padding:20px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:100;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid rgba(0,247,255,0.2);
+}
 
-    /* --- 3D Sphere --- */
-    .sphere{
-        position:absolute;
-        width:300px;
-        height:300px;
-        border-radius:50%;
-        background:radial-gradient(circle,#00f7ff,#ff00ff);
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-        pointer-events:none;
-        transition:transform 0.1s ease;
-        mix-blend-mode:screen;
-        opacity:0.3;
-    }
+nav h1{
+    color:#00f7ff;
+    letter-spacing:2px;
+}
 
-    /* --- About Section Scroll Reveal --- */
-    .about{
-        padding:100px 50px;
-        opacity:0;
-        transform:translateY(50px);
-        transition:1s;
-    }
-    .about.show{
-        opacity:1;
-        transform:translateY(0);
-    }
-    .about h3{
-        font-size:36px;
-        margin-bottom:20px;
-        color:#00f7ff;
-    }
-    .about p{
-        font-size:18px;
-        color:#ccc;
-        max-width:700px;
-    }
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:30px;
+}
 
-    /* --- Particle Background --- */
-    #particles-js{
-        position:fixed;
-        width:100%;
-        height:100%;
-        top:0;
-        left:0;
-        z-index:0;
-    }
+nav ul li{
+    cursor:pointer;
+    transition:0.3s;
+}
+
+nav ul li:hover{
+    color:#00f7ff;
+}
+
+/* --- HERO SECTION --- */
+.hero{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-content{
+    z-index:2;
+}
+
+.hero h2{
+    font-size:50px;
+    margin-bottom:20px;
+    background:linear-gradient(90deg,#00f7ff,#ff00ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    font-size:18px;
+    color:#aaa;
+    margin-bottom:30px;
+}
+
+.btn{
+    padding:12px 30px;
+    border:none;
+    background:#00f7ff;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+    border-radius:30px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#fff;
+}
+
+/* --- MOUSE-REACTIVE SPHERE --- */
+.sphere{
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #ff00ff, #6a00ff);
+    box-shadow:0 0 60px #ff00ff, 0 0 120px #6a00ff;
+    animation:float 4s ease-in-out infinite;
+    z-index:1;
+    pointer-events:none;
+    mix-blend-mode:screen;
+    opacity:0.4;
+}
+
+@keyframes float{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-20px);}
+    100%{transform:translateY(0px);}
+}
+
+/* --- ABOUT SECTION --- */
+.about{
+    padding:100px 50px;
+    text-align:center;
+    background:#0a0a0a;
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
+}
+
+.about.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.about h2{
+    font-size:40px;
+    margin-bottom:20px;
+    color:#00f7ff;
+}
+
+.about p{
+    max-width:800px;
+    margin:auto;
+    color:#aaa;
+    line-height:1.6;
+}
+
+/* --- PARTICLES BACKGROUND --- */
+#particles-js{
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:0;
+}
 
 </style>
 </head>
+
 <body>
 
-<!-- Particles Background -->
+<!-- PARTICLES -->
 <div id="particles-js"></div>
 
-<!-- Navbar -->
+<!-- NAVBAR -->
 <nav>
-    <div class="logo"><strong>ORXA</strong></div>
-    <div class="menu">
-        <a href="#hero">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-    </div>
+    <h1>ORXA</h1>
+    <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Features</li>
+        <li>Contact</li>
+    </ul>
 </nav>
 
-<!-- Hero Section -->
-<section class="hero" id="hero">
-    <h2>ORXA AI</h2>
-    <p>The future of interactive AI experiences. Next-gen neural interfaces for web & beyond.</p>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h2>Future of AI Interface</h2>
+        <p>ORXA blends immersive 3D visuals with intelligent interaction.</p>
+        <button class="btn">Explore Now</button>
+    </div>
     <div class="sphere"></div>
 </section>
 
-<!-- About Section -->
-<section class="about" id="about">
-    <h3>Our Vision</h3>
-    <p>ORXA aims to redefine AI interaction, blending immersive visuals, dynamic motion, and intelligent automation into a seamless digital experience. The future is interactive, adaptive, and beautiful.</p>
+<!-- ABOUT -->
+<section class="about">
+    <h2>About ORXA</h2>
+    <p>
+        ORXA is a next-generation artificial intelligence platform designed to deliver futuristic digital experiences.
+        With immersive visuals, dynamic 3D environments, and seamless user interaction,
+        ORXA transforms the way users engage with intelligent systems.
+    </p>
 </section>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<!-- PARTICLES JS -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 <script>
-    // --- Mouse Reactive Sphere ---
-    document.addEventListener("mousemove", function(e){
-        const sphere = document.querySelector(".sphere");
-        const x = (window.innerWidth - e.pageX) / 50;
-        const y = (window.innerHeight - e.pageY) / 50;
-        sphere.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-    });
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 80, "density":{"enable":true,"value_area":800} },
+    "color": { "value": "#00f7ff" },
+    "shape": { "type": "circle" },
+    "opacity": { "value": 0.3, "random":true },
+    "size": { "value": 3, "random":true },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#00f7ff",
+      "opacity": 0.2,
+      "width": 1
+    },
+    "move": { "enable": true, "speed": 2, "random":true }
+  },
+  "interactivity": {
+    "detect_on":"canvas",
+    "events":{"onhover":{"enable":true,"mode":"repulse"},"onclick":{"enable":true,"mode":"push"},"resize":true},
+    "modes":{"repulse":{"distance":100},"push":{"particles_nb":4}}
+  },
+  "retina_detect":true
+});
+</script>
 
-    // --- Scroll Reveal ---
-    window.addEventListener("scroll", ()=>{
-        const about = document.querySelector(".about");
-        const position = about.getBoundingClientRect().top;
-        const screen = window.innerHeight;
-        if(position < screen - 100){
-            about.classList.add("show");
-        }
-    });
+<script>
+// --- MOUSE-REACTIVE SPHERE ---
+document.addEventListener("mousemove", function(e){
+    const sphere = document.querySelector(".sphere");
+    const x = (window.innerWidth - e.pageX) / 50;
+    const y = (window.innerHeight - e.pageY) / 50;
+    sphere.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+});
 
-    // --- Particles.js Config ---
-    particlesJS("particles-js", {
-      "particles": {
-        "number": {"value":80,"density":{"enable":true,"value_area":800}},
-        "color": {"value":"#00f7ff"},
-        "shape": {"type":"circle"},
-        "opacity": {"value":0.3,"random":true},
-        "size": {"value":3,"random":true},
-        "line_linked": {"enable":true,"distance":150,"color":"#00f7ff","opacity":0.2,"width":1},
-        "move": {"enable":true,"speed":2,"direction":"none","random":true,"straight":false,"out_mode":"out","bounce":false}
-      },
-      "interactivity": {
-        "detect_on":"canvas",
-        "events":{"onhover":{"enable":true,"mode":"repulse"},"onclick":{"enable":true,"mode":"push"},"resize":true},
-        "modes":{"repulse":{"distance":100},"push":{"particles_nb":4}}
-      },
-      "retina_detect":true
-    });
+// --- SCROLL REVEAL ---
+window.addEventListener("scroll", ()=>{
+    const about = document.querySelector(".about");
+    const position = about.getBoundingClientRect().top;
+    const screen = window.innerHeight;
+    if(position < screen - 100){
+        about.classList.add("show");
+    }
+});
 </script>
 
 </body>
