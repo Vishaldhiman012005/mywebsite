@@ -103,6 +103,8 @@ nav ul li:hover{
 /* --- MOUSE-REACTIVE SPHERE --- */
 .sphere{
     position:absolute;
+    top:50%;
+    left:50%;
     width:250px;
     height:250px;
     border-radius:50%;
@@ -113,12 +115,13 @@ nav ul li:hover{
     pointer-events:none;
     mix-blend-mode:screen;
     opacity:0.4;
+    transform: translate(-50%, -50%);
 }
 
 @keyframes float{
-    0%{transform:translateY(0px);}
-    50%{transform:translateY(-20px);}
-    100%{transform:translateY(0px);}
+    0%{transform:translate(-50%, -50%) translateY(0px);}
+    50%{transform:translate(-50%, -50%) translateY(-20px);}
+    100%{transform:translate(-50%, -50%) translateY(0px);}
 }
 
 /* --- ABOUT SECTION --- */
@@ -228,9 +231,11 @@ particlesJS("particles-js", {
 // --- MOUSE-REACTIVE SPHERE ---
 document.addEventListener("mousemove", function(e){
     const sphere = document.querySelector(".sphere");
-    const x = (window.innerWidth - e.pageX) / 50;
-    const y = (window.innerHeight - e.pageY) / 50;
-    sphere.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    const offsetX = (e.clientX - centerX) / 30; // adjust divisor for movement intensity
+    const offsetY = (e.clientY - centerY) / 30;
+    sphere.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
 });
 
 // --- SCROLL REVEAL ---
