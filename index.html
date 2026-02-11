@@ -3,38 +3,45 @@
 <head>
     <title>ORXA AI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         body {
             margin: 0;
-            overflow: hidden;
-            background: black;
             font-family: Arial, sans-serif;
+            background: black;
             color: white;
+            overflow-x: hidden;
         }
 
-        #content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            z-index: 10;
+            padding: 40px;
         }
 
         h1 {
             font-size: 70px;
-            letter-spacing: 5px;
             background: linear-gradient(90deg, #00f2ff, #8e2de2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         p {
-            font-size: 20px;
+            max-width: 600px;
             opacity: 0.8;
+            font-size: 18px;
         }
 
         button {
@@ -53,16 +60,57 @@
             transform: scale(1.1);
             box-shadow: 0 0 20px #00f2ff;
         }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            width: 250px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px #8e2de2;
+        }
     </style>
 </head>
 
 <body>
 
-<div id="content">
+<section>
     <h1>ORXA</h1>
     <p>The Future of Intelligent Interaction</p>
-    <button onclick="alert('AI Module Coming Soon 🚀')">Talk to ORXA</button>
-</div>
+    <button onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+        Explore More
+    </button>
+</section>
+
+<section id="features">
+    <h2>Why ORXA?</h2>
+    <div class="features">
+        <div class="card">
+            <h3>AI Powered</h3>
+            <p>Advanced intelligence ready to assist you instantly.</p>
+        </div>
+        <div class="card">
+            <h3>Smart Responses</h3>
+            <p>Understands context and delivers accurate replies.</p>
+        </div>
+        <div class="card">
+            <h3>Fast & Secure</h3>
+            <p>Lightning speed performance with top security.</p>
+        </div>
+    </div>
+</section>
 
 <script>
     const scene = new THREE.Scene();
@@ -73,7 +121,6 @@
 
     const particlesGeometry = new THREE.BufferGeometry();
     const particlesCount = 2000;
-
     const posArray = new Float32Array(particlesCount * 3);
 
     for(let i = 0; i < particlesCount * 3; i++){
@@ -89,22 +136,20 @@
 
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particlesMesh);
-
     camera.position.z = 3;
+
     let mouseX = 0;
-let mouseY = 0;
+    let mouseY = 0;
 
-document.addEventListener('mousemove', (event) => {
-    mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
-    mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
-});
-
+    document.addEventListener('mousemove', (event) => {
+        mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
+    });
 
     function animate() {
         requestAnimationFrame(animate);
         particlesMesh.rotation.y += 0.001 + mouseX * 0.002;
         particlesMesh.rotation.x += 0.001 + mouseY * 0.002;
-
         renderer.render(scene, camera);
     }
 
@@ -119,4 +164,3 @@ document.addEventListener('mousemove', (event) => {
 
 </body>
 </html>
-
