@@ -1,119 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ORXA AI</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-scroll-behavior:smooth;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Orbitron',sans-serif;
 }
 
 body{
-background:#000;
-color:white;
-font-family:Arial, sans-serif;
-overflow-x:hidden;
+    background:#000;
+    overflow-x:hidden;
+    color:white;
 }
 
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-2;
-}
-
-#particles{
-position:fixed;
-width:100%;
-height:100%;
-z-index:-3;
-}
-
+/* NAVBAR */
 nav{
-position:fixed;
-top:0;
-width:100%;
-padding:20px;
-display:flex;
-justify-content:space-between;
-background:rgba(0,0,0,0.5);
-backdrop-filter:blur(10px);
-z-index:10;
+    position:fixed;
+    width:100%;
+    padding:20px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:10;
 }
 
-nav h2{
-color:#00f0ff;
+nav h1{
+    color:#00f7ff;
+    letter-spacing:2px;
 }
 
-section{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:40px;
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:30px;
 }
 
-.hero h1{
-font-size:60px;
-background:linear-gradient(90deg,#00f0ff,#ff00ff);
--webkit-background-clip:text;
-color:transparent;
+nav ul li{
+    cursor:pointer;
+    transition:0.3s;
+}
+
+nav ul li:hover{
+    color:#00f7ff;
+}
+
+/* HERO SECTION */
+.hero{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+}
+
+.hero-content{
+    z-index:2;
+}
+
+.hero h2{
+    font-size:50px;
+    margin-bottom:20px;
 }
 
 .hero p{
-margin-top:20px;
-font-size:18px;
-opacity:0.8;
+    font-size:18px;
+    color:#aaa;
+    margin-bottom:30px;
 }
 
-.cards{
-display:flex;
-gap:30px;
-margin-top:50px;
-flex-wrap:wrap;
-justify-content:center;
+.btn{
+    padding:12px 30px;
+    border:none;
+    background:#00f7ff;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+    border-radius:30px;
+    transition:0.3s;
 }
 
-.card{
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(15px);
-padding:30px;
-border-radius:20px;
-width:250px;
-transition:0.4s;
+.btn:hover{
+    background:#fff;
 }
 
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 20px #00f0ff;
+/* GLOWING SPHERE */
+.sphere{
+    position:absolute;
+    right:10%;
+    bottom:10%;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #ff00ff, #6a00ff);
+    box-shadow:0 0 60px #ff00ff, 0 0 120px #6a00ff;
+    animation:float 4s ease-in-out infinite;
+    z-index:1;
 }
 
-.orb-container{
-position:fixed;
-bottom:-150px;
-right:-150px;
-width:500px;
-height:500px;
-z-index:-1;
-opacity:0.8;
+@keyframes float{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-20px);}
+    100%{transform:translateY(0px);}
 }
 
-.glow{
-animation:pulse 3s infinite;
+/* ABOUT SECTION */
+.about{
+    padding:100px 50px;
+    text-align:center;
+    background:#0a0a0a;
 }
 
-@keyframes pulse{
-0%{filter:drop-shadow(0 0 5px #ff00ff);}
-50%{filter:drop-shadow(0 0 25px #ff00ff);}
-100%{filter:drop-shadow(0 0 5px #ff00ff);}
+.about h2{
+    font-size:40px;
+    margin-bottom:20px;
+    color:#00f7ff;
+}
+
+.about p{
+    max-width:800px;
+    margin:auto;
+    color:#aaa;
+    line-height:1.6;
+}
+
+/* PARTICLES BACKGROUND */
+#particles-js{
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:0;
 }
 
 </style>
@@ -121,79 +146,58 @@ animation:pulse 3s infinite;
 
 <body>
 
-<div id="particles"></div>
+<div id="particles-js"></div>
 
 <nav>
-<h2>ORXA</h2>
+    <h1>ORXA</h1>
+    <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Features</li>
+        <li>Contact</li>
+    </ul>
 </nav>
 
 <section class="hero">
-<div class="orb-container glow" id="orb"></div>
-<h1>ORXA AI</h1>
-<p>The Future of Intelligent Interaction</p>
+    <div class="hero-content">
+        <h2>Future of AI Interface</h2>
+        <p>ORXA blends immersive 3D visuals with intelligent interaction.</p>
+        <button class="btn">Explore Now</button>
+    </div>
+    <div class="sphere"></div>
 </section>
 
-<section>
-<h1>About ORXA</h1>
-<p>ORXA is a next-generation AI interface blending immersive 3D visuals and intelligent interaction.</p>
+<section class="about">
+    <h2>About ORXA</h2>
+    <p>
+        ORXA is a next-generation artificial intelligence platform designed to deliver futuristic digital experiences.
+        With immersive visuals, dynamic 3D environments, and seamless user interaction,
+        ORXA transforms the way users engage with intelligent systems.
+    </p>
 </section>
 
-<section>
-<h1>Core Features</h1>
-<div class="cards">
-<div class="card">
-<h3>AI Powered</h3>
-<p>Advanced intelligence engine.</p>
-</div>
-<div class="card">
-<h3>Immersive 3D</h3>
-<p>Interactive particle system & visuals.</p>
-</div>
-<div class="card">
-<h3>Fast & Secure</h3>
-<p>Optimized performance with secure backend ready.</p>
-</div>
-</div>
-</section>
+<!-- PARTICLES JS -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 <script>
-tsParticles.load("particles",{
-particles:{
-number:{value:80},
-color:{value:"#00f0ff"},
-links:{enable:true,color:"#00f0ff"},
-move:{enable:true,speed:1}
-}
-});
-
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
-const renderer=new THREE.WebGLRenderer({alpha:true});
-renderer.setSize(500,500);
-document.getElementById("orb").appendChild(renderer.domElement);
-
-const geometry=new THREE.SphereGeometry(2,64,64);
-const material=new THREE.MeshBasicMaterial({color:0xff00ff,wireframe:true});
-const sphere=new THREE.Mesh(geometry,material);
-scene.add(sphere);
-
-camera.position.z=5;
-
-function animate(){
-requestAnimationFrame(animate);
-sphere.rotation.x+=0.01;
-sphere.rotation.y+=0.01;
-renderer.render(scene,camera);
-}
-animate();
-
-window.addEventListener("resize",()=>{
-renderer.setSize(window.innerWidth,window.innerHeight);
-camera.aspect=window.innerWidth/window.innerHeight;
-camera.updateProjectionMatrix();
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 80 },
+    "color": { "value": "#00f7ff" },
+    "shape": { "type": "circle" },
+    "opacity": { "value": 0.5 },
+    "size": { "value": 3 },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#00f7ff",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": { "enable": true, "speed": 2 }
+  }
 });
 </script>
 
 </body>
 </html>
-
