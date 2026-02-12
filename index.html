@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ORXA AI</title>
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -14,26 +13,27 @@
     padding:0;
     box-sizing:border-box;
     font-family:'Orbitron',sans-serif;
+    scroll-behavior:smooth;
 }
 
 body{
     background:#000;
-    overflow-x:hidden;
     color:white;
+    overflow-x:hidden;
 }
 
-/* NAVBAR */
+/* ---------------- NAVBAR ---------------- */
+
 nav{
     position:fixed;
     width:100%;
-    padding:20px 50px;
+    padding:20px 40px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    z-index:10;
-    background:rgba(0,0,0,0.4);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid rgba(0,247,255,0.2);
+    background:rgba(0,0,0,0.5);
+    backdrop-filter:blur(12px);
+    z-index:1000;
 }
 
 nav h1{
@@ -44,19 +44,32 @@ nav h1{
 nav ul{
     list-style:none;
     display:flex;
-    gap:30px;
+    gap:25px;
 }
 
 nav ul li{
     cursor:pointer;
+    position:relative;
     transition:0.3s;
 }
 
-nav ul li:hover{
-    color:#00f7ff;
+nav ul li::after{
+    content:"";
+    position:absolute;
+    width:0%;
+    height:2px;
+    background:#00f7ff;
+    left:0;
+    bottom:-5px;
+    transition:0.3s;
 }
 
-/* HERO SECTION */
+nav ul li:hover::after{
+    width:100%;
+}
+
+/* ---------------- HERO ---------------- */
+
 .hero{
     height:100vh;
     display:flex;
@@ -68,70 +81,84 @@ nav ul li:hover{
 }
 
 .hero-content{
-    z-index:2;
+    z-index:5;
 }
 
 .hero h2{
-    font-size:50px;
-    margin-bottom:20px;
+    font-size:48px;
     background:linear-gradient(90deg,#00f7ff,#ff00ff);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
+    margin-bottom:20px;
 }
 
 .hero p{
-    font-size:18px;
     color:#aaa;
     margin-bottom:30px;
 }
 
+/* ----------- NEON BUTTON ----------- */
+
 .btn{
-    padding:12px 30px;
+    padding:12px 35px;
     border:none;
-    background:#00f7ff;
-    color:#000;
-    font-weight:bold;
-    cursor:pointer;
     border-radius:30px;
+    font-weight:bold;
+    background:transparent;
+    color:#00f7ff;
+    border:2px solid #00f7ff;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
     transition:0.3s;
-    white-space: nowrap;
 }
 
 .btn:hover{
-    background:#fff;
+    background:#00f7ff;
+    color:#000;
+    box-shadow:0 0 20px #00f7ff,0 0 40px #00f7ff;
 }
 
-/* GLOWING SPHERE */
+/* Ripple effect */
+.btn span{
+    position:absolute;
+    background:white;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    pointer-events:none;
+    animation:ripple 0.6s linear;
+}
+
+@keyframes ripple{
+    0%{width:0;height:0;opacity:0.5;}
+    100%{width:300px;height:300px;opacity:0;}
+}
+
+/* -------- Sphere -------- */
+
 .sphere{
     position:absolute;
     right:10%;
     bottom:10%;
-    width:250px;
-    height:250px;
+    width:220px;
+    height:220px;
     border-radius:50%;
     background:radial-gradient(circle at 30% 30%, #ff00ff, #6a00ff);
-    box-shadow:0 0 60px #ff00ff, 0 0 120px #6a00ff;
-    animation:float 4s ease-in-out infinite, pulse 2.5s ease-in-out infinite;
-    z-index:1;
-    pointer-events:none;
-    mix-blend-mode:screen;
-    opacity:0.6;
+    box-shadow:0 0 50px #ff00ff,0 0 100px #6a00ff;
+    animation:float 4s ease-in-out infinite;
+    opacity:0.7;
 }
 
 @keyframes float{
     0%{transform:translateY(0px);}
-    50%{transform:translateY(-20px);}
+    50%{transform:translateY(-15px);}
     100%{transform:translateY(0px);}
 }
 
-@keyframes pulse{
-    0%, 100% { transform: scale(1); opacity:0.6; }
-    50% { transform: scale(1.05); opacity:0.9; }
-}
+/* ------------- ABOUT ------------- */
 
-/* ABOUT SECTION */
 .about{
-    padding:100px 50px;
+    padding:100px 40px;
     text-align:center;
     background:#0a0a0a;
     opacity:0;
@@ -145,142 +172,103 @@ nav ul li:hover{
 }
 
 .about h2{
-    font-size:40px;
-    margin-bottom:20px;
     color:#00f7ff;
+    margin-bottom:20px;
 }
 
-.about p{
-    max-width:800px;
-    margin:auto;
-    color:#aaa;
-    line-height:1.6;
-}
+/* ------------- MOBILE ------------- */
 
-/* PARTICLES BACKGROUND */
-#particles-js{
-    position:fixed;
-    width:100%;
-    height:100%;
-    z-index:0;
-}
+@media(max-width:768px){
 
-/* --- MOBILE RESPONSIVE --- */
-@media (max-width:768px){
     nav{
         padding:15px 20px;
     }
-    nav h1{
-        font-size:20px;
-    }
+
     nav ul{
-        gap:15px;
+        gap:12px;
         font-size:14px;
     }
+
     .hero h2{
-        font-size:32px;
+        font-size:30px;
     }
-    .hero p{
-        font-size:16px;
-    }
-    .btn{
-        padding:10px 20px;
-        font-size:14px;
-    }
+
     .sphere{
-        width:150px;
-        height:150px;
+        width:140px;
+        height:140px;
         right:5%;
         bottom:5%;
     }
+
     .about{
-        padding:80px 20px;
-    }
-    .about h2{
-        font-size:28px;
-    }
-    .about p{
-        font-size:14px;
+        padding:70px 20px;
     }
 }
+
 </style>
 </head>
 
 <body>
 
-<div id="particles-js"></div>
-
 <nav>
     <h1>ORXA</h1>
     <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Features</li>
-        <li>Contact</li>
+        <li onclick="scrollToSection('home')">Home</li>
+        <li onclick="scrollToSection('about')">About</li>
     </ul>
 </nav>
 
-<section class="hero">
+<section class="hero" id="home">
     <div class="hero-content">
         <h2>Future of AI Interface</h2>
-        <p>ORXA blends immersive 3D visuals with intelligent interaction.</p>
+        <p>Immersive. Intelligent. Interactive.</p>
         <button class="btn">Explore Now</button>
     </div>
     <div class="sphere"></div>
 </section>
 
-<section class="about">
+<section class="about" id="about">
     <h2>About ORXA</h2>
     <p>
-        ORXA is a next-generation artificial intelligence platform designed to deliver futuristic digital experiences.
-        With immersive visuals, dynamic 3D environments, and seamless user interaction,
-        ORXA transforms the way users engage with intelligent systems.
+        ORXA is a next generation AI platform focused on futuristic UI, 
+        interactive experiences and immersive digital environments.
+        Built with modern web technology to deliver performance and design together.
     </p>
 </section>
 
-<!-- PARTICLES JS -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-
 <script>
-particlesJS("particles-js", {
-  "particles": {
-    "number": { "value": 80 },
-    "color": { "value": "#00f7ff" },
-    "shape": { "type": "circle" },
-    "opacity": { "value": 0.5 },
-    "size": { "value": 3 },
-    "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#00f7ff",
-      "opacity": 0.4,
-      "width": 1
-    },
-    "move": { "enable": true, "speed": 2 }
-  }
-});
-</script>
 
-<script>
-// --- MOUSE-REACTIVE SPHERE ---
-document.addEventListener("mousemove", function(e){
-    const sphere = document.querySelector(".sphere");
-    const centerX = window.innerWidth/2;
-    const centerY = window.innerHeight/2;
-    const offsetX = (e.clientX - centerX)/40;
-    const offsetY = (e.clientY - centerY)/40;
-    sphere.style.transform = `translate(calc(${offsetX}px), calc(${offsetY}px))`;
-});
+/* Smooth scroll */
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
 
-// --- SCROLL REVEAL ---
+/* Scroll reveal */
 window.addEventListener("scroll", ()=>{
     const about = document.querySelector(".about");
-    const position = about.getBoundingClientRect().top;
-    const screen = window.innerHeight;
-    if(position < screen - 100){
+    const pos = about.getBoundingClientRect().top;
+    if(pos < window.innerHeight - 100){
         about.classList.add("show");
     }
 });
+
+/* Mouse reactive sphere */
+document.addEventListener("mousemove", function(e){
+    const sphere = document.querySelector(".sphere");
+    const x = (window.innerWidth/2 - e.pageX)/40;
+    const y = (window.innerHeight/2 - e.pageY)/40;
+    sphere.style.transform = `translate(${x}px,${y}px)`;
+});
+
+/* Ripple effect */
+document.querySelector(".btn").addEventListener("click", function(e){
+    const circle = document.createElement("span");
+    circle.style.left = e.offsetX + "px";
+    circle.style.top = e.offsetY + "px";
+    this.appendChild(circle);
+    setTimeout(()=> circle.remove(),600);
+});
+
 </script>
 
 </body>
