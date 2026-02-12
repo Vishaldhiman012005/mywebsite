@@ -251,6 +251,64 @@ background:#050505;
 color:#00f7ff;
 margin-bottom:20px;
 }
+  /* ===== EXTRA ENHANCEMENTS (Add Only) ===== */
+
+/* Navbar hover underline animation */
+nav a {
+    position: relative;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: #0096ff;
+    transition: 0.4s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* What We Build section buttons */
+.card::after {
+    content: "Learn More";
+    display: block;
+    margin-top: 20px;
+    padding: 8px 0;
+    background: rgba(0,150,255,0.2);
+    border-radius: 20px;
+    font-size: 14px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover::after {
+    background: #0096ff;
+}
+
+/* Smooth fade-in animation */
+section {
+    animation: fadeIn 1.2s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Contact form glow effect */
+.contact input:focus,
+.contact textarea:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(0,150,255,0.6);
+}
+
 
 </style>
 </head>
@@ -311,7 +369,35 @@ ORXA is a futuristic AI platform delivering immersive digital experiences with i
 <section class="contact" id="contact">
 <h2>Contact ORXA</h2>
 <p>Let’s build something futuristic together.</p>
+
+<form action="https://formspree.io/f/<!-- modify this form HTML and place wherever you want your form -->
+<form
+  action="https://formspree.io/f/xzdaezkg"
+  method="POST"
+>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <button type="submit">Send</button>
+</form>" method="POST" class="contact-form">
+  
+  <input type="text" name="name" placeholder="Your Name" required>
+  
+  <input type="email" name="email" placeholder="Your Email" required>
+  
+  <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+  
+  <button type="submit" class="primary-btn">Send Message</button>
+
+</form>
 </section>
+
 
 <script>
 
@@ -346,3 +432,4 @@ section.classList.add("show");
 
 </body>
 </html>
+
