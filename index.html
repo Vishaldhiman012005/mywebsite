@@ -6,267 +6,332 @@
 <title>ORXA AI</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Orbitron',sans-serif;
-    scroll-behavior:smooth;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Orbitron',sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
-    background:#000;
-    color:white;
-    overflow-x:hidden;
+background:#000;
+color:white;
+overflow-x:hidden;
 }
 
-/* ---------------- NAVBAR ---------------- */
+/* ============ PARTICLES ============ */
+
+#particles-js{
+position:fixed;
+width:100%;
+height:100%;
+z-index:0;
+}
+
+/* ============ NAVBAR ============ */
 
 nav{
-    position:fixed;
-    width:100%;
-    padding:20px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(0,0,0,0.5);
-    backdrop-filter:blur(12px);
-    z-index:1000;
+position:fixed;
+width:100%;
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(12px);
+z-index:1000;
+border-bottom:1px solid rgba(0,255,255,0.2);
 }
 
 nav h1{
-    color:#00f7ff;
-    letter-spacing:2px;
+color:#00f7ff;
+letter-spacing:2px;
 }
 
 nav ul{
-    list-style:none;
-    display:flex;
-    gap:25px;
+display:flex;
+gap:25px;
+list-style:none;
 }
 
 nav ul li{
-    cursor:pointer;
-    position:relative;
-    transition:0.3s;
+cursor:pointer;
+position:relative;
+transition:0.3s;
 }
 
 nav ul li::after{
-    content:"";
-    position:absolute;
-    width:0%;
-    height:2px;
-    background:#00f7ff;
-    left:0;
-    bottom:-5px;
-    transition:0.3s;
+content:"";
+position:absolute;
+width:0%;
+height:2px;
+background:#00f7ff;
+left:0;
+bottom:-5px;
+transition:0.3s;
 }
 
 nav ul li:hover::after{
-    width:100%;
+width:100%;
 }
 
-/* ---------------- HERO ---------------- */
+/* ============ HERO ============ */
 
 .hero{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    position:relative;
-    padding:0 20px;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+position:relative;
+padding:0 20px;
+z-index:2;
 }
 
 .hero-content{
-    z-index:5;
+z-index:5;
 }
 
 .hero h2{
-    font-size:48px;
-    background:linear-gradient(90deg,#00f7ff,#ff00ff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    margin-bottom:20px;
+font-size:50px;
+background:linear-gradient(90deg,#00f7ff,#ff00ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:20px;
 }
 
 .hero p{
-    color:#aaa;
-    margin-bottom:30px;
+color:#aaa;
+margin-bottom:30px;
 }
 
-/* ----------- NEON BUTTON ----------- */
+/* Neon Button */
 
 .btn{
-    padding:12px 35px;
-    border:none;
-    border-radius:30px;
-    font-weight:bold;
-    background:transparent;
-    color:#00f7ff;
-    border:2px solid #00f7ff;
-    cursor:pointer;
-    position:relative;
-    overflow:hidden;
-    transition:0.3s;
+padding:12px 35px;
+border-radius:30px;
+font-weight:bold;
+background:transparent;
+color:#00f7ff;
+border:2px solid #00f7ff;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+transition:0.3s;
 }
 
 .btn:hover{
-    background:#00f7ff;
-    color:#000;
-    box-shadow:0 0 20px #00f7ff,0 0 40px #00f7ff;
+background:#00f7ff;
+color:#000;
+box-shadow:0 0 20px #00f7ff,0 0 40px #00f7ff;
 }
 
-/* Ripple effect */
 .btn span{
-    position:absolute;
-    background:white;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    pointer-events:none;
-    animation:ripple 0.6s linear;
+position:absolute;
+background:white;
+transform:translate(-50%,-50%);
+border-radius:50%;
+pointer-events:none;
+animation:ripple 0.6s linear;
 }
 
 @keyframes ripple{
-    0%{width:0;height:0;opacity:0.5;}
-    100%{width:300px;height:300px;opacity:0;}
+0%{width:0;height:0;opacity:0.5;}
+100%{width:300px;height:300px;opacity:0;}
 }
 
-/* -------- Sphere -------- */
+/* Sphere */
 
 .sphere{
-    position:absolute;
-    right:10%;
-    bottom:10%;
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, #ff00ff, #6a00ff);
-    box-shadow:0 0 50px #ff00ff,0 0 100px #6a00ff;
-    animation:float 4s ease-in-out infinite;
-    opacity:0.7;
+position:absolute;
+right:10%;
+bottom:10%;
+width:230px;
+height:230px;
+border-radius:50%;
+background:radial-gradient(circle at 30% 30%, #ff00ff, #6a00ff);
+box-shadow:0 0 60px #ff00ff,0 0 120px #6a00ff;
+animation:float 4s ease-in-out infinite, pulse 3s ease-in-out infinite;
+opacity:0.7;
+z-index:3;
 }
 
 @keyframes float{
-    0%{transform:translateY(0px);}
-    50%{transform:translateY(-15px);}
-    100%{transform:translateY(0px);}
+0%{transform:translateY(0px);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0px);}
 }
 
-/* ------------- ABOUT ------------- */
+@keyframes pulse{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.05);}
+}
+
+/* Parallax glow layers */
+
+.hero-layer{
+position:absolute;
+width:400px;
+height:400px;
+border-radius:50%;
+background:radial-gradient(circle,rgba(0,255,255,0.15),transparent);
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+z-index:1;
+pointer-events:none;
+}
+
+.layer2{
+width:300px;
+height:300px;
+background:radial-gradient(circle,rgba(255,0,255,0.15),transparent);
+}
+
+.layer3{
+width:200px;
+height:200px;
+background:radial-gradient(circle,rgba(255,255,0,0.1),transparent);
+}
+
+/* ABOUT */
 
 .about{
-    padding:100px 40px;
-    text-align:center;
-    background:#0a0a0a;
-    opacity:0;
-    transform:translateY(50px);
-    transition:1s;
+padding:120px 40px;
+text-align:center;
+background:#0a0a0a;
+opacity:0;
+transform:translateY(60px);
+transition:1s;
 }
 
 .about.show{
-    opacity:1;
-    transform:translateY(0);
+opacity:1;
+transform:translateY(0);
 }
 
 .about h2{
-    color:#00f7ff;
-    margin-bottom:20px;
+color:#00f7ff;
+margin-bottom:20px;
 }
 
-/* ------------- MOBILE ------------- */
+/* MOBILE */
 
 @media(max-width:768px){
 
-    nav{
-        padding:15px 20px;
-    }
+.hero h2{font-size:30px;}
 
-    nav ul{
-        gap:12px;
-        font-size:14px;
-    }
+nav ul{gap:12px;font-size:14px;}
 
-    .hero h2{
-        font-size:30px;
-    }
-
-    .sphere{
-        width:140px;
-        height:140px;
-        right:5%;
-        bottom:5%;
-    }
-
-    .about{
-        padding:70px 20px;
-    }
+.sphere{
+width:150px;
+height:150px;
+right:5%;
+bottom:5%;
 }
 
+.hero-layer{
+width:150px;
+height:150px;
+}
+
+.layer2{width:120px;height:120px;}
+.layer3{width:80px;height:80px;}
+
+.about{padding:80px 20px;}
+
+}
 </style>
 </head>
 
 <body>
 
+<div id="particles-js"></div>
+
 <nav>
-    <h1>ORXA</h1>
-    <ul>
-        <li onclick="scrollToSection('home')">Home</li>
-        <li onclick="scrollToSection('about')">About</li>
-    </ul>
+<h1>ORXA</h1>
+<ul>
+<li onclick="scrollToSection('home')">Home</li>
+<li onclick="scrollToSection('about')">About</li>
+</ul>
 </nav>
 
 <section class="hero" id="home">
-    <div class="hero-content">
-        <h2>Future of AI Interface</h2>
-        <p>Immersive. Intelligent. Interactive.</p>
-        <button class="btn">Explore Now</button>
-    </div>
-    <div class="sphere"></div>
+<div class="hero-content">
+<h2>Future of AI Interface</h2>
+<p>Immersive. Intelligent. Interactive.</p>
+<button class="btn">Explore Now</button>
+</div>
+
+<div class="hero-layer layer1"></div>
+<div class="hero-layer layer2"></div>
+<div class="hero-layer layer3"></div>
+
+<div class="sphere"></div>
 </section>
 
 <section class="about" id="about">
-    <h2>About ORXA</h2>
-    <p>
-        ORXA is a next generation AI platform focused on futuristic UI, 
-        interactive experiences and immersive digital environments.
-        Built with modern web technology to deliver performance and design together.
-    </p>
+<h2>About ORXA</h2>
+<p>
+ORXA is a futuristic AI platform delivering immersive 3D-inspired digital experiences with intelligent interaction and modern performance architecture.
+</p>
 </section>
 
 <script>
 
+/* Particles */
+particlesJS("particles-js",{
+particles:{
+number:{value:60},
+color:{value:"#00f7ff"},
+shape:{type:"circle"},
+opacity:{value:0.5},
+size:{value:3},
+line_linked:{enable:true,distance:150,color:"#00f7ff",opacity:0.4,width:1},
+move:{enable:true,speed:2}
+}
+});
+
 /* Smooth scroll */
 function scrollToSection(id){
-    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
 /* Scroll reveal */
-window.addEventListener("scroll", ()=>{
-    const about = document.querySelector(".about");
-    const pos = about.getBoundingClientRect().top;
-    if(pos < window.innerHeight - 100){
-        about.classList.add("show");
-    }
+window.addEventListener("scroll",()=>{
+const about=document.querySelector(".about");
+if(about.getBoundingClientRect().top<window.innerHeight-100){
+about.classList.add("show");
+}
 });
 
-/* Mouse reactive sphere */
-document.addEventListener("mousemove", function(e){
-    const sphere = document.querySelector(".sphere");
-    const x = (window.innerWidth/2 - e.pageX)/40;
-    const y = (window.innerHeight/2 - e.pageY)/40;
-    sphere.style.transform = `translate(${x}px,${y}px)`;
+/* Mouse parallax */
+document.addEventListener("mousemove",(e)=>{
+const sphere=document.querySelector(".sphere");
+const layers=document.querySelectorAll(".hero-layer");
+
+let x=(window.innerWidth/2-e.pageX)/40;
+let y=(window.innerHeight/2-e.pageY)/40;
+
+sphere.style.transform=`translate(${x}px,${y}px)`;
+
+layers.forEach((layer,i)=>{
+let factor=(i+1)/6;
+layer.style.transform=`translate(calc(-50% + ${x*factor}px),calc(-50% + ${y*factor}px))`;
+});
 });
 
-/* Ripple effect */
-document.querySelector(".btn").addEventListener("click", function(e){
-    const circle = document.createElement("span");
-    circle.style.left = e.offsetX + "px";
-    circle.style.top = e.offsetY + "px";
-    this.appendChild(circle);
-    setTimeout(()=> circle.remove(),600);
+/* Ripple */
+document.querySelector(".btn").addEventListener("click",function(e){
+const circle=document.createElement("span");
+circle.style.left=e.offsetX+"px";
+circle.style.top=e.offsetY+"px";
+this.appendChild(circle);
+setTimeout(()=>circle.remove(),600);
 });
 
 </script>
