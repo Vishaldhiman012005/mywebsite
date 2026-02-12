@@ -64,6 +64,7 @@ nav ul li:hover{
     align-items:center;
     text-align:center;
     position:relative;
+    padding:0 20px;
 }
 
 .hero-content{
@@ -93,6 +94,7 @@ nav ul li:hover{
     cursor:pointer;
     border-radius:30px;
     transition:0.3s;
+    white-space: nowrap;
 }
 
 .btn:hover{
@@ -156,6 +158,45 @@ nav ul li:hover{
     width:100%;
     height:100%;
     z-index:0;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width:768px){
+    nav{
+        padding:15px 20px;
+    }
+    nav h1{
+        font-size:20px;
+    }
+    nav ul{
+        gap:15px;
+        font-size:14px;
+    }
+    .hero h2{
+        font-size:32px;
+    }
+    .hero p{
+        font-size:16px;
+    }
+    .btn{
+        padding:10px 20px;
+        font-size:14px;
+    }
+    .sphere{
+        width:150px;
+        height:150px;
+        right:5%;
+        bottom:5%;
+    }
+    .about{
+        padding:80px 20px;
+    }
+    .about h2{
+        font-size:28px;
+    }
+    .about p{
+        font-size:14px;
+    }
 }
 </style>
 </head>
