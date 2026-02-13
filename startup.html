@@ -77,9 +77,9 @@ nav ul li:hover::after{
 width:100%;
 }
 
-/* HERO TITLE FOR PAGE */
-.hero-page{
-height:30vh;
+/* HERO */
+.hero{
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -89,18 +89,219 @@ padding:0 20px;
 z-index:2;
 }
 
-.hero-page h2{
-font-size:40px;
+.hero h2{
+font-size:50px;
 background:linear-gradient(90deg,#00f7ff,#ff00ff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-margin-bottom:10px;
+margin-bottom:20px;
+}
+
+.hero p{
+color:#aaa;
+margin-bottom:30px;
+}
+
+.btn{
+padding:12px 35px;
+border-radius:30px;
+font-weight:bold;
+background:transparent;
+color:#00f7ff;
+border:2px solid #00f7ff;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#00f7ff;
+color:#000;
+box-shadow:0 0 20px #00f7ff,0 0 40px #00f7ff;
+}
+
+/* SPHERE */
+.sphere{
+position:absolute;
+right:10%;
+bottom:10%;
+width:230px;
+height:230px;
+border-radius:50%;
+background:radial-gradient(circle at 30% 30%, #ff00ff, #6a00ff);
+box-shadow:0 0 60px #ff00ff,0 0 120px #6a00ff;
+animation:float 4s ease-in-out infinite;
+opacity:0.7;
+z-index:3;
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0px);}
+}
+
+/* FEATURES */
+.features{
+padding:120px 40px;
+text-align:center;
+background:#050505;
+opacity:0;
+transform:translateY(60px);
+transition:1s;
+}
+
+.features.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.features h2{
+color:#00f7ff;
+margin-bottom:50px;
+}
+
+.feature-grid{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+.feature-card{
+background:#111;
+padding:30px;
+width:280px;
+border-radius:15px;
+transition:0.4s;
+border:1px solid rgba(0,255,255,0.2);
+}
+
+.feature-card:hover{
+transform:translateY(-12px);
+box-shadow:0 0 20px rgba(0,255,255,0.4);
+}
+
+.feature-card h3{
+margin-bottom:15px;
+color:#00f7ff;
+}
+
+/* CTA BUTTONS */
+.cta-section{
+margin-top:50px;
+}
+
+.primary-btn,.secondary-btn{
+padding:12px 30px;
+border-radius:30px;
+font-weight:bold;
+text-decoration:none;
+margin:10px;
+display:inline-block;
+transition:0.3s;
+}
+
+.primary-btn{
+background:#00f7ff;
+color:#000;
+}
+
+.primary-btn:hover{
+box-shadow:0 0 20px #00f7ff;
+}
+
+.secondary-btn{
+border:2px solid #00f7ff;
+color:#00f7ff;
+}
+
+.secondary-btn:hover{
+background:#00f7ff;
+color:#000;
+}
+
+/* ABOUT */
+.about{
+padding:120px 40px;
+text-align:center;
+background:#0a0a0a;
+opacity:0;
+transform:translateY(60px);
+transition:1s;
+}
+
+.about.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.about h2{
+color:#00f7ff;
+margin-bottom:20px;
+}
+
+/* CONTACT */
+.contact {
+text-align:center;
+padding:120px 10%;
+background:#050505;
+}
+
+.contact-sub{
+color:#aaa;
+margin-bottom:40px;
+}
+
+.contact-form{
+max-width:450px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+.contact-form input,
+.contact-form textarea{
+padding:14px;
+border-radius:10px;
+border:1px solid rgba(0,150,255,0.3);
+background: rgba(255,255,255,0.05);
+color:white;
+font-size:15px;
+outline:none;
+transition:0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+border-color:#0096ff;
+box-shadow:0 0 15px rgba(0,150,255,0.6);
+}
+
+.contact-form textarea{
+resize:none;
+}
+
+.contact-form button{
+padding:14px;
+border-radius:30px;
+border:none;
+background:#0096ff;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.contact-form button:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #0096ff;
 }
 
 /* STARTUP FORM */
 .startup-form-container{
 padding:60px 20px 120px 20px;
-max-width:600px;
+max-width:700px;
 margin:auto;
 position:relative;
 z-index:10;
@@ -114,59 +315,77 @@ gap:20px;
 
 .startup-form input,
 .startup-form select,
-.startup-form textarea {
-padding: 14px;
-border-radius: 10px;
-border: 1px solid rgba(0,150,255,0.3);
+.startup-form textarea{
+padding:14px;
+border-radius:10px;
+border:1px solid rgba(0,150,255,0.3);
 background: rgba(255,255,255,0.05);
-color: #fff;
-font-size: 15px;
-outline: none;
-transition: 0.3s;
+color:white;
+font-size:15px;
+outline:none;
+transition:0.3s;
+}
+
+.startup-form select option{
+color:#000;
+background:#fff;
 }
 
 .startup-form input:focus,
 .startup-form select:focus,
-.startup-form textarea:focus {
-border-color: #0096ff;
-box-shadow: 0 0 15px rgba(0,150,255,0.6);
+.startup-form textarea:focus{
+border-color:#0096ff;
+box-shadow:0 0 15px rgba(0,150,255,0.6);
 }
 
-/* Fix dropdown option text */
-.startup-form select option {
-color: #000;
-background: #fff;
+.startup-form button{
+padding:14px;
+border-radius:30px;
+border:none;
+background:#00f7ff;
+color:#000;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
 }
 
-/* Submit button */
-.startup-form button {
-padding: 14px;
-border-radius: 30px;
-border: none;
-background: #00f7ff;
-color: #000;
-font-weight: bold;
-cursor: pointer;
-transition: 0.3s;
+.startup-form button:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #00f7ff;
 }
 
-.startup-form button:hover {
-transform: scale(1.05);
-box-shadow: 0 0 20px #00f7ff;
+/* TIMELINE */
+.timeline-container{
+margin-top:40px;
+display:flex;
+flex-direction:column;
+gap:25px;
 }
 
-/* Simulation result cards */
-#simulation-result div {
+.timeline-card{
 background: rgba(0,255,255,0.1);
-padding: 20px;
-border-radius: 15px;
-margin-bottom: 20px;
-border: 1px solid rgba(0,255,255,0.2);
-transition: 0.4s;
+padding:20px;
+border-radius:15px;
+border:1px solid rgba(0,255,255,0.2);
+position: relative;
+overflow: hidden;
+transition:0.4s;
+animation: glow 1.5s infinite alternate;
 }
 
-#simulation-result div:hover {
-box-shadow: 0 0 20px rgba(0,255,255,0.4);
+.timeline-card h3{
+color:#00f7ff;
+margin-bottom:10px;
+}
+
+.timeline-card:hover{
+box-shadow:0 0 25px rgba(0,255,255,0.7);
+transform:translateY(-5px);
+}
+
+@keyframes glow{
+0%{box-shadow:0 0 10px rgba(0,255,255,0.3);}
+100%{box-shadow:0 0 25px rgba(0,255,255,0.7);}
 }
 
 canvas {
@@ -199,15 +418,58 @@ pointer-events: none;
 </ul>
 </nav>
 
-<section class="hero-page">
-<h2>Simulate Your Startup Evolution</h2>
+<section class="hero" id="home">
+<div>
+<h2>Future of AI Interface</h2>
+<p>Immersive. Intelligent. Interactive.</p>
+<button class="btn" onclick="scrollToSection('features')">Explore Now</button>
+</div>
+<div class="sphere"></div>
 </section>
+
+<section class="features" id="features">
+<h2>What We Build</h2>
+<div class="feature-grid">
+<div class="feature-card">
+<h3>AI Solutions</h3>
+<p>Automation tools and intelligent systems to scale your business.</p>
+</div>
+<div class="feature-card">
+<h3>Web Platforms</h3>
+<p>Modern, fast and responsive digital products.</p>
+</div>
+<div class="feature-card">
+<h3>Future Tech</h3>
+<p>Innovating at the edge of technology and design.</p>
+</div>
+</div>
+
+<div class="cta-section">
+<a href="#contact" class="primary-btn">Get Started</a>
+<a href="#about" class="secondary-btn">Learn More</a>
+</div>
+</section>
+
+<section class="about" id="about">
+<h2>About ORXA</h2>
+<p>ORXA is a futuristic AI platform delivering immersive digital experiences with intelligent interaction and modern architecture.</p>
+</section>
+
+<section class="contact" id="contact">
+<h2>Contact ORXA</h2>
+<p class="contact-sub">Let’s build something futuristic together.</p>
+
+<form class="contact-form" action="https://formspree.io/f/xzdaezkg" method="POST">
+<input type="hidden" name="_subject" value="New ORXA Message">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Your Message" required></textarea>
+<button type="submit">Send Message</button>
+</form>
 
 <div class="startup-form-container">
 <form id="startup-form" class="startup-form">
-
 <input type="text" name="ideaName" placeholder="Startup Idea Name" required>
-
 <select name="industry" required>
 <option value="">Select Industry</option>
 <option value="AI">AI</option>
@@ -216,10 +478,8 @@ pointer-events: none;
 <option value="FinTech">FinTech</option>
 <option value="Other">Other</option>
 </select>
-
 <input type="number" name="budget" placeholder="Initial Budget ($)" required>
 <input type="number" name="teamSize" placeholder="Team Size" required>
-
 <select name="timeframe" required>
 <option value="">Select Timeframe</option>
 <option value="6 months">6 months</option>
@@ -227,24 +487,20 @@ pointer-events: none;
 <option value="2 years">2 years</option>
 <option value="5 years">5 years</option>
 </select>
-
 <select name="risk" required>
 <option value="">Risk Appetite</option>
 <option value="Low">Low</option>
 <option value="Medium">Medium</option>
 <option value="High">High</option>
 </select>
-
 <button type="submit">Simulate Evolution</button>
 </form>
 
-<!-- Simulation Result -->
-<div id="simulation-result"></div>
-
+<div class="timeline-container" id="timeline-result"></div>
 </div>
+</section>
 
 <script>
-/* Particles */
 particlesJS("particles-js",{
 particles:{
 number:{value:60},
@@ -257,41 +513,48 @@ move:{enable:true,speed:2}
 }
 });
 
-/* Startup Form JS */
+function scrollToSection(id){
+document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+window.addEventListener("scroll",()=>{
+document.querySelectorAll(".features,.about").forEach(section=>{
+if(section.getBoundingClientRect().top<window.innerHeight-100){
+section.classList.add("show");
+}
+});
+});
+
+/* Startup Simulation */
 document.getElementById('startup-form').addEventListener('submit', function(e){
-    e.preventDefault();
+e.preventDefault();
+const ideaName=this.ideaName.value;
+const industry=this.industry.value;
+const budget=parseFloat(this.budget.value);
+const teamSize=parseInt(this.teamSize.value);
+const timeframe=this.timeframe.value;
+const risk=this.risk.value;
 
-    const ideaName = this.ideaName.value;
-    const industry = this.industry.value;
-    const budget = parseFloat(this.budget.value);
-    const teamSize = parseInt(this.teamSize.value);
-    const timeframe = this.timeframe.value;
-    const risk = this.risk.value;
+const timeline=document.getElementById('timeline-result');
+timeline.innerHTML='';
 
-    // Simulation logic
-    const resultContainer = document.getElementById('simulation-result');
-    resultContainer.innerHTML = ''; // clear previous results
+let value=budget;
+let growth=risk==='Low'?1.2:risk==='Medium'?1.5:2;
 
-    let growthFactor = 1;
-    if(risk === 'Low') growthFactor = 1.2;
-    if(risk === 'Medium') growthFactor = 1.5;
-    if(risk === 'High') growthFactor = 2;
+for(let i=1;i<=4;i++){
+value=value*growth+teamSize*1000*i;
+const card=document.createElement('div');
+card.className='timeline-card';
+card.innerHTML=`<h3>${ideaName} - Milestone ${i}</h3>
+<p>Industry: ${industry}</p>
+<p>Team Size: ${teamSize}</p>
+<p>Timeframe: ${timeframe}</p>
+<p>Risk: ${risk}</p>
+<p><strong>Projected Value: $${value.toFixed(2)}</strong></p>`;
+timeline.appendChild(card);
+}
 
-    let projectedValue = budget * growthFactor * teamSize;
-
-    const card = document.createElement('div');
-    card.innerHTML = `
-      <h3 style="color:#00f7ff">${ideaName} Evolution</h3>
-      <p>Industry: ${industry}</p>
-      <p>Initial Budget: $${budget}</p>
-      <p>Team Size: ${teamSize}</p>
-      <p>Timeframe: ${timeframe}</p>
-      <p>Risk Appetite: ${risk}</p>
-      <p><strong>Projected Value: $${projectedValue.toFixed(2)}</strong></p>
-    `;
-    resultContainer.appendChild(card);
-
-    card.scrollIntoView({behavior: 'smooth'});
+timeline.scrollIntoView({behavior:'smooth'});
 });
 </script>
 
