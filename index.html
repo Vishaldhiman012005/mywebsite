@@ -240,17 +240,65 @@ color:#00f7ff;
 margin-bottom:20px;
 }
 
-/* CONTACT */
-.contact{
-padding:120px 40px;
-text-align:center;
-background:#050505;
+/* ===== CONTACT SECTION FIX ===== */
+
+.contact {
+    text-align: center;
+    padding: 120px 10%;
+    background: #050505;
 }
 
-.contact h2{
-color:#00f7ff;
-margin-bottom:20px;
+.contact-sub {
+    color: #aaa;
+    margin-bottom: 40px;
 }
+
+.contact-form {
+    max-width: 450px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,150,255,0.3);
+    background: rgba(255,255,255,0.05);
+    color: white;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #0096ff;
+    box-shadow: 0 0 15px rgba(0,150,255,0.6);
+}
+
+.contact-form textarea {
+    resize: none;
+}
+
+.contact-form button {
+    padding: 14px;
+    border-radius: 30px;
+    border: none;
+    background: #0096ff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact-form button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #0096ff;
+}
+
 
 </style>
 </head>
@@ -309,8 +357,15 @@ ORXA is a futuristic AI platform delivering immersive digital experiences with i
 </section>
 
 <section class="contact" id="contact">
-<h2>Contact ORXA</h2>
-<p>Let’s build something futuristic together.</p>
+    <h2>Contact ORXA</h2>
+    <p class="contact-sub">Let’s build something futuristic together.</p>
+
+    <form class="contact-form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
 </section>
 
 <script>
@@ -346,3 +401,4 @@ section.classList.add("show");
 
 </body>
 </html>
+
