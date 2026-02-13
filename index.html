@@ -376,13 +376,20 @@ ORXA is a futuristic AI platform delivering immersive digital experiences with i
     <h2>Contact ORXA</h2>
     <p class="contact-sub">Let’s build something futuristic together.</p>
 
-    <form class="contact-form"action="https://formspree.io/f/xzdaezkg"
-  method="POST">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea rows="5" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-    </form>
+    <form action="https://formspree.io/f/xzdaezkg" method="POST">
+
+  <input type="hidden" name="_subject" value="New ORXA Message">
+
+  <input type="text" name="name" placeholder="Your Name" required>
+
+  <input type="email" name="email" placeholder="Your Email" required>
+
+  <textarea name="message" placeholder="Your Message" required></textarea>
+
+  <button type="submit">Send Message</button>
+
+</form>
+
 </section>
 
 <script>
@@ -418,6 +425,7 @@ section.classList.add("show");
 
 </body>
 </html>
+
 
 
 
