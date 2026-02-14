@@ -9,29 +9,17 @@
 <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Orbitron',sans-serif;
-scroll-behavior:smooth;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;scroll-behavior:smooth;}
+body{background:#000;color:white;overflow-x:hidden;}
 
-body{
-background:#000;
-color:white;
-overflow-x:hidden;
-}
-
-/* PARTICLES */
 #particles-js{
 position:fixed;
 width:100%;
 height:100%;
-z-index:0;
+z-index:-1;
+pointer-events:none;
 }
 
-/* NAVBAR */
 nav{
 position:fixed;
 width:100%;
@@ -44,40 +32,15 @@ backdrop-filter:blur(12px);
 z-index:1000;
 border-bottom:1px solid rgba(0,255,255,0.2);
 }
-
-nav h1{
-color:#00f7ff;
-letter-spacing:2px;
-}
-
-nav ul{
-display:flex;
-gap:25px;
-list-style:none;
-}
-
-nav ul li{
-cursor:pointer;
-position:relative;
-transition:0.3s;
-}
-
+nav h1{color:#00f7ff;letter-spacing:2px;}
+nav ul{display:flex;gap:25px;list-style:none;}
+nav ul li{cursor:pointer;position:relative;}
 nav ul li::after{
-content:"";
-position:absolute;
-width:0%;
-height:2px;
-background:#00f7ff;
-left:0;
-bottom:-5px;
-transition:0.3s;
+content:"";position:absolute;width:0%;height:2px;
+background:#00f7ff;left:0;bottom:-5px;transition:0.3s;
 }
+nav ul li:hover::after{width:100%;}
 
-nav ul li:hover::after{
-width:100%;
-}
-
-/* HERO */
 .hero{
 height:100vh;
 display:flex;
@@ -88,7 +51,6 @@ position:relative;
 padding:0 20px;
 z-index:2;
 }
-
 .hero h2{
 font-size:50px;
 background:linear-gradient(90deg,#00f7ff,#ff00ff);
@@ -96,53 +58,34 @@ background:linear-gradient(90deg,#00f7ff,#ff00ff);
 -webkit-text-fill-color:transparent;
 margin-bottom:20px;
 }
+.hero p{color:#aaa;margin-bottom:30px;}
 
-.hero p{
-color:#aaa;
-margin-bottom:30px;
-}
-
-/* BUTTON */
 .btn{
-padding:12px 35px;
-border-radius:30px;
-font-weight:bold;
-background:transparent;
-color:#00f7ff;
-border:2px solid #00f7ff;
-cursor:pointer;
-transition:0.3s;
+padding:12px 35px;border-radius:30px;font-weight:bold;
+background:transparent;color:#00f7ff;
+border:2px solid #00f7ff;cursor:pointer;transition:0.3s;
 }
-
 .btn:hover{
-background:#00f7ff;
-color:#000;
+background:#00f7ff;color:#000;
 box-shadow:0 0 20px #00f7ff,0 0 40px #00f7ff;
 }
 
-/* SPHERE */
 .sphere{
 position:absolute;
 right:10%;
 bottom:10%;
-width:230px;
-height:230px;
-border-radius:50%;
+width:230px;height:230px;border-radius:50%;
 background:radial-gradient(circle at 30% 30%, #ff00ff, #6a00ff);
 box-shadow:0 0 60px #ff00ff,0 0 120px #6a00ff;
-animation:float 4s ease-in-out infinite;
-opacity:0.7;
-z-index:3;
+animation:float 4s ease-in-out infinite;opacity:0.7;
 }
-
 @keyframes float{
 0%{transform:translateY(0px);}
 50%{transform:translateY(-15px);}
 100%{transform:translateY(0px);}
 }
 
-/* FEATURES */
-.features{
+.features,.about{
 padding:120px 40px;
 text-align:center;
 background:#050505;
@@ -150,232 +93,61 @@ opacity:0;
 transform:translateY(60px);
 transition:1s;
 }
-
-.features.show{
+.features.show,.about.show{
 opacity:1;
 transform:translateY(0);
 }
-
-.features h2{
-color:#00f7ff;
-margin-bottom:50px;
-}
+.features h2,.about h2{color:#00f7ff;margin-bottom:50px;}
 
 .feature-grid{
-display:flex;
-justify-content:center;
-gap:30px;
-flex-wrap:wrap;
+display:flex;justify-content:center;
+gap:30px;flex-wrap:wrap;
 }
-
 .feature-card{
-background:#111;
-padding:30px;
-width:280px;
-border-radius:15px;
-transition:0.4s;
+background:#111;padding:30px;width:280px;
+border-radius:15px;transition:0.4s;
 border:1px solid rgba(0,255,255,0.2);
 }
-
 .feature-card:hover{
 transform:translateY(-12px);
 box-shadow:0 0 20px rgba(0,255,255,0.4);
 }
+.feature-card h3{margin-bottom:15px;color:#00f7ff;}
 
-.feature-card h3{
-margin-bottom:15px;
-color:#00f7ff;
-}
-
-.cta-section{
-margin-top:50px;
-}
-
-.primary-btn,.secondary-btn{
-padding:12px 30px;
-border-radius:30px;
-font-weight:bold;
-text-decoration:none;
-margin:10px;
-display:inline-block;
-transition:0.3s;
-}
-
-.primary-btn{
-background:#00f7ff;
-color:#000;
-}
-
-.primary-btn:hover{
-box-shadow:0 0 20px #00f7ff;
-}
-
-.secondary-btn{
-border:2px solid #00f7ff;
-color:#00f7ff;
-}
-
-.secondary-btn:hover{
-background:#00f7ff;
-color:#000;
-}
-
-/* ABOUT */
-.about{
-padding:120px 40px;
+.contact{
 text-align:center;
-background:#0a0a0a;
-opacity:0;
-transform:translateY(60px);
-transition:1s;
+padding:120px 10%;
+background:#050505;
+}
+.contact-sub{color:#aaa;margin-bottom:40px;}
+.contact-form{
+max-width:450px;margin:auto;
+display:flex;flex-direction:column;gap:20px;
+}
+.contact-form input,.contact-form textarea{
+padding:14px;border-radius:10px;
+border:1px solid rgba(0,150,255,0.3);
+background:rgba(255,255,255,0.05);
+color:white;font-size:15px;
+}
+.contact-form button{
+padding:14px;border-radius:30px;
+border:none;background:#0096ff;
+color:white;font-weight:bold;cursor:pointer;
+}
+.contact-form button:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #0096ff;
 }
 
-.about.show{
-opacity:1;
-transform:translateY(0);
+#ai-model{
+position:fixed;
+bottom:0;
+right:0;
+width:300px;
+height:400px;
+z-index:5;
 }
-
-.about h2{
-color:#00f7ff;
-margin-bottom:20px;
-}
-
-/* ===== CONTACT SECTION FIX ===== */
-
-.contact {
-    text-align: center;
-    padding: 120px 10%;
-    background: #050505;
-}
-
-.contact-sub {
-    color: #aaa;
-    margin-bottom: 40px;
-}
-
-.contact-form {
-    max-width: 450px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.contact-form input,
-.contact-form textarea {
-    padding: 14px;
-    border-radius: 10px;
-    border: 1px solid rgba(0,150,255,0.3);
-    background: rgba(255,255,255,0.05);
-    color: white;
-    font-size: 15px;
-    outline: none;
-    transition: 0.3s;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-    border-color: #0096ff;
-    box-shadow: 0 0 15px rgba(0,150,255,0.6);
-}
-
-.contact-form textarea {
-    resize: none;
-}
-
-.contact-form button {
-    padding: 14px;
-    border-radius: 30px;
-    border: none;
-    background: #0096ff;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.contact-form button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #0096ff;
-}
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-#particles-js {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-}
-.contact-form {
-  position: relative;
-  z-index: 10;
-}
-
-/* ===== STARTUP EVOLUTION FORM ===== */
-.startup-form {
-    max-width: 500px;
-    margin: 60px auto 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    text-align: left;
-}
-
-.startup-form h2{
-    color: #00f7ff;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.startup-form input,
-.startup-form select,
-.startup-form textarea {
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid rgba(0,150,255,0.3);
-    background: rgba(255,255,255,0.05);
-    color: #fff;
-    font-size: 15px;
-    outline: none;
-    transition: 0.3s;
-}
-
-.startup-form input:focus,
-.startup-form select:focus,
-.startup-form textarea:focus {
-    border-color: #0096ff;
-    box-shadow: 0 0 15px rgba(0,150,255,0.6);
-}
-
-.startup-form button {
-    padding: 14px;
-    border-radius: 30px;
-    border: none;
-    background: #00f7ff;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.startup-form button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #00f7ff;
-}
-   #ai-model {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  width: 300px;
-  height: 400px;
-  z-index: 9999;
-}
-
 </style>
 </head>
 
@@ -398,7 +170,6 @@ canvas {
 <h2>Future of AI Interface</h2>
 <p>Immersive. Intelligent. Interactive.</p>
 <button class="btn" onclick="scrollToSection('features')">Explore Now</button>
-    <a href="startup.html" class="primary-btn">Simulate Startup Evolution</a>
 </div>
 <div class="sphere"></div>
 </section>
@@ -419,58 +190,39 @@ canvas {
 <p>Innovating at the edge of technology and design.</p>
 </div>
 </div>
-
-<div class="cta-section">
-<a href="#contact" class="primary-btn">Get Started</a>
-<a href="#about" class="secondary-btn">Learn More</a>
-</div>
 </section>
 
 <section class="about" id="about">
 <h2>About ORXA</h2>
-<p>
-ORXA is a futuristic AI platform delivering immersive digital experiences with intelligent interaction and modern architecture.
-</p>
+<p>ORXA is a futuristic AI platform delivering immersive digital experiences.</p>
 </section>
 
 <section class="contact" id="contact">
-    <h2>Contact ORXA</h2>
-    <p class="contact-sub">Let’s build something futuristic together.</p>
-
-    <form class="contact-form" 
-      action="https://formspree.io/f/xzdaezkg" 
-      method="POST">
-
-  <input type="hidden" name="_subject" value="New ORXA Message">
-
-  <input type="text" name="name" placeholder="Your Name" required>
-  <input type="email" name="email" placeholder="Your Email" required>
-  <textarea name="message" placeholder="Your Message" required></textarea>
-  <button type="submit">Send Message</button>
+<h2>Contact ORXA</h2>
+<p class="contact-sub">Let’s build something futuristic together.</p>
+<form class="contact-form" action="https://formspree.io/f/xzdaezkg" method="POST">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Your Message" required></textarea>
+<button type="submit">Send Message</button>
 </form>
 </section>
 
+<div id="ai-model"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>
+
 <script>
-
-/* Particles */
-particlesJS("particles-js",{
-particles:{
-number:{value:60},
-color:{value:"#00f7ff"},
-shape:{type:"circle"},
-opacity:{value:0.5},
-size:{value:3},
+particlesJS("particles-js",{particles:{number:{value:60},color:{value:"#00f7ff"},
+shape:{type:"circle"},opacity:{value:0.5},size:{value:3},
 line_linked:{enable:true,distance:150,color:"#00f7ff",opacity:0.4,width:1},
-move:{enable:true,speed:2}
-}
-});
+move:{enable:true,speed:2}}});
 
-/* Smooth scroll */
 function scrollToSection(id){
 document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-/* Scroll reveal */
 window.addEventListener("scroll",()=>{
 document.querySelectorAll(".features,.about").forEach(section=>{
 if(section.getBoundingClientRect().top<window.innerHeight-100){
@@ -479,74 +231,37 @@ section.classList.add("show");
 });
 });
 
-/* Startup Form JS */
-document.getElementById('startup-form').addEventListener('submit', function(e){
-    e.preventDefault();
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(45,300/400,0.1,1000);
+const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
+renderer.setSize(300,400);
+document.getElementById("ai-model").appendChild(renderer.domElement);
 
-    const ideaName = this.ideaName.value;
-    const industry = this.industry.value;
-    const budget = parseFloat(this.budget.value);
-    const teamSize = parseInt(this.teamSize.value);
-    const timeframe = this.timeframe.value;
-    const risk = this.risk.value;
+const light=new THREE.HemisphereLight(0xffffff,0x444444,2);
+scene.add(light);
 
-    const startupData = {ideaName, industry, budget, teamSize, timeframe, risk};
+const dirLight=new THREE.DirectionalLight(0xffffff,1);
+dirLight.position.set(0,1,1);
+scene.add(dirLight);
 
-    console.log('Startup Data Captured:', startupData);
+const loader=new THREE.GLTFLoader();
+loader.load('https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+function(gltf){
+const model=gltf.scene;
+scene.add(model);
+model.scale.set(2,2,2);
+model.position.y=-1;
 
-    alert('Startup data captured! Check console for details.');
-
-    // NEXT: pass startupData to evolution simulation logic
+function animate(){
+requestAnimationFrame(animate);
+model.rotation.y+=0.01;
+renderer.render(scene,camera);
+}
+animate();
 });
 
-<!-- Three.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>
-
-<div id="ai-model"></div>
-
-<script>
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  renderer.setSize(300, 400);
-  document.getElementById("ai-model").appendChild(renderer.domElement);
-
-  const light = new THREE.HemisphereLight(0xffffff, 0x444444, 2);
-  scene.add(light);
-
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-  directionalLight.position.set(0, 1, 1);
-  scene.add(directionalLight);
-
-  const loader = new THREE.GLTFLoader();
-
-  // FREE READY MODEL (No download needed)
-  loader.load(
-    'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
-    function (gltf) {
-      const model = gltf.scene;
-      scene.add(model);
-      model.scale.set(2, 2, 2);
-      model.position.y = -1;
-
-      function animate() {
-        requestAnimationFrame(animate);
-        model.rotation.y += 0.01;
-        renderer.render(scene, camera);
-      }
-      animate();
-    }
-  );
-
-  camera.position.z = 5;
+camera.position.z=5;
 </script>
-
 
 </body>
 </html>
-
-
-
-
-
