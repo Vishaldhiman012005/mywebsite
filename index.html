@@ -367,6 +367,40 @@ canvas {
     transform: scale(1.05);
     box-shadow: 0 0 20px #00f7ff;
 }
+    /* ORXA BOT */
+#orxa-bot {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 90px;
+  cursor: pointer;
+  z-index: 9999;
+  animation: floatBot 3s ease-in-out infinite;
+}
+
+#orxa-bot img {
+  width: 100%;
+  filter: drop-shadow(0 0 20px #00f7ff);
+}
+
+@keyframes floatBot {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+#orxa-message {
+  position: fixed;
+  bottom: 130px;
+  right: 30px;
+  background: #00f7ff;
+  color: #000;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: none;
+  z-index: 9999;
+}
 </style>
 </head>
 
@@ -489,9 +523,40 @@ document.getElementById('startup-form').addEventListener('submit', function(e){
 
     // NEXT: pass startupData to evolution simulation logic
 });
+    const bot = document.getElementById("orxa-bot");
+const message = document.getElementById("orxa-message");
+
+// Show welcome message after 2 sec
+setTimeout(() => {
+  message.style.display = "block";
+}, 2000);
+
+// Hide after 4 sec
+setTimeout(() => {
+  message.style.display = "none";
+}, 6000);
+
+// Click to talk again
+bot.addEventListener("click", () => {
+  message.innerText = "Hey there 👋 Need help exploring ORXA?";
+  message.style.display = "block";
+
+  setTimeout(() => {
+    message.style.display = "none";
+  }, 4000);
+});
+
 </script>
+    <!-- ORXA Mascot -->
+<div id="orxa-bot">
+  <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="ORXA Bot">
+</div>
+
+<div id="orxa-message">Welcome to ORXA 🚀</div>
+
 
 </body>
 </html>
+
 
 
