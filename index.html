@@ -5,261 +5,172 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ORXA AI</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+<!-- MODEL VIEWER -->
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Orbitron',sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;scroll-behavior:smooth;}
+body{background:#000;color:white;overflow-x:hidden;}
+
+#particles-js{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-1;
+pointer-events:none;
 }
 
-body{
-  background:#000814;
-  color:white;
-  overflow-x:hidden;
-}
-
-/* Navbar */
 nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:20px 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(10px);
-  z-index:1000;
+position:fixed;
+width:100%;
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(12px);
+z-index:1000;
+border-bottom:1px solid rgba(0,255,255,0.2);
 }
+nav h1{color:#00f7ff;}
+nav ul{display:flex;gap:25px;list-style:none;}
+nav ul li{cursor:pointer;}
 
-nav h1{
-  color:#00f7ff;
-}
-
-nav ul{
-  list-style:none;
-  display:flex;
-  gap:25px;
-}
-
-nav ul li{
-  cursor:pointer;
-  transition:0.3s;
-}
-
-nav ul li:hover{
-  color:#00f7ff;
-}
-
-/* Hero */
 .hero{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding-top:80px;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+position:relative;
+padding:0 20px;
+z-index:2;
 }
-
 .hero h2{
-  font-size:50px;
-  background:linear-gradient(90deg,#00f7ff,#ff00ff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  margin-bottom:20px;
+font-size:50px;
+background:linear-gradient(90deg,#00f7ff,#ff00ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:20px;
 }
-
-.hero p{
-  color:#aaa;
-  margin-bottom:30px;
-}
+.hero p{color:#aaa;margin-bottom:30px;}
 
 .btn{
-  padding:12px 30px;
-  border-radius:30px;
-  border:2px solid #00f7ff;
-  color:#00f7ff;
-  background:transparent;
-  cursor:pointer;
-  transition:0.3s;
+padding:12px 35px;border-radius:30px;font-weight:bold;
+background:transparent;color:#00f7ff;
+border:2px solid #00f7ff;cursor:pointer;
 }
-
 .btn:hover{
-  background:#00f7ff;
-  color:black;
+background:#00f7ff;color:#000;
 }
 
-/* Sections */
-section{
-  padding:120px 40px;
-  text-align:center;
+.features,.about{
+padding:120px 40px;
+text-align:center;
+background:#050505;
 }
 
-.features,.about,.contact{
-  background:#050505;
+.contact{
+text-align:center;
+padding:120px 10%;
+background:#050505;
 }
 
-h2{
-  color:#00f7ff;
-  margin-bottom:30px;
-}
-
-/* Contact */
 .contact-form{
-  max-width:400px;
-  margin:auto;
-  display:flex;
-  flex-direction:column;
-  gap:15px;
+max-width:450px;margin:auto;
+display:flex;flex-direction:column;gap:20px;
 }
 
-.contact-form input,
-.contact-form textarea{
-  padding:12px;
-  border-radius:8px;
-  border:1px solid #00f7ff;
-  background:rgba(255,255,255,0.05);
-  color:white;
+.contact-form input,.contact-form textarea{
+padding:14px;border-radius:10px;
+border:1px solid rgba(0,150,255,0.3);
+background:rgba(255,255,255,0.05);
+color:white;
 }
 
 .contact-form button{
-  padding:12px;
-  border:none;
-  border-radius:25px;
-  background:#00f7ff;
-  color:black;
-  font-weight:bold;
-  cursor:pointer;
+padding:14px;border-radius:30px;
+border:none;background:#0096ff;
+color:white;font-weight:bold;cursor:pointer;
 }
 
-/* Popup */
-#welcomePopup{
-  position:fixed;
-  top:30%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:#001d3d;
-  padding:30px;
-  border-radius:15px;
-  text-align:center;
-  z-index:9999;
-  box-shadow:0 0 25px cyan;
-}
-
-#welcomePopup button{
-  margin-top:15px;
-  padding:10px 20px;
-  background:cyan;
-  border:none;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-/* 3D Character */
-#model-container{
-  position:fixed;
-  bottom:0;
-  right:0;
-  width:350px;
-  height:350px;
-  z-index:5;
+/* 3D CHARACTER POSITION */
+model-viewer{
+position:fixed;
+bottom:0;
+right:0;
+width:350px;
+height:500px;
+z-index:5;
 }
 </style>
 </head>
 
 <body>
 
+<div id="particles-js"></div>
+
 <nav>
-  <h1>ORXA</h1>
-  <ul>
-    <li>Home</li>
-    <li>Features</li>
-    <li>About</li>
-    <li>Contact</li>
-  </ul>
+<h1>ORXA</h1>
+<ul>
+<li onclick="scrollToSection('home')">Home</li>
+<li onclick="scrollToSection('features')">Features</li>
+<li onclick="scrollToSection('about')">About</li>
+<li onclick="scrollToSection('contact')">Contact</li>
+</ul>
 </nav>
 
-<section class="hero">
-  <div>
-    <h2>Future of AI Interface</h2>
-    <p>Immersive. Intelligent. Interactive.</p>
-    <button class="btn">Explore Now</button>
-  </div>
-</section>
-
-<section class="features">
-  <h2>What We Build</h2>
-  <p>AI Solutions • Web Platforms • Smart Automation</p>
-</section>
-
-<section class="about">
-  <h2>About ORXA</h2>
-  <p>ORXA is building next-generation AI-powered digital experiences.</p>
-</section>
-
-<section class="contact">
-  <h2>Contact ORXA</h2>
-  <form class="contact-form">
-    <input type="text" placeholder="Your Name">
-    <input type="email" placeholder="Your Email">
-    <textarea placeholder="Your Message"></textarea>
-    <button type="submit">Send</button>
-  </form>
-</section>
-
-<!-- Popup -->
-<div id="welcomePopup">
-  <h2>Welcome to ORXA 🚀</h2>
-  <p>Your AI Experience Begins</p>
-  <button onclick="closePopup()">Enter</button>
+<section class="hero" id="home">
+<div>
+<h2>Future of AI Interface</h2>
+<p>Immersive. Intelligent. Interactive.</p>
+<button class="btn" onclick="scrollToSection('features')">Explore Now</button>
 </div>
+</section>
 
-<!-- 3D Model -->
-<div id="model-container"></div>
+<section class="features" id="features">
+<h2>What We Build</h2>
+<p>AI Solutions • Web Platforms • Future Tech</p>
+</section>
 
-<!-- Three.js -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/loaders/GLTFLoader.js"></script>
+<section class="about" id="about">
+<h2>About ORXA</h2>
+<p>ORXA is a futuristic AI platform delivering immersive digital experiences.</p>
+</section>
+
+<section class="contact" id="contact">
+<h2>Contact ORXA</h2>
+<form class="contact-form" action="https://formspree.io/f/xzdaezkg" method="POST">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Your Message" required></textarea>
+<button type="submit">Send Message</button>
+</form>
+</section>
+
+<!-- REAL 3D CHARACTER -->
+<model-viewer 
+src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+auto-rotate 
+camera-controls 
+shadow-intensity="1"
+exposure="1"
+environment-image="neutral">
+</model-viewer>
 
 <script>
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75,1,0.1,1000);
-const renderer = new THREE.WebGLRenderer({alpha:true,antialias:true});
+particlesJS("particles-js",{particles:{number:{value:60},
+color:{value:"#00f7ff"},
+shape:{type:"circle"},
+opacity:{value:0.5},
+size:{value:3},
+move:{enable:true,speed:2}}});
 
-renderer.setSize(350,350);
-document.getElementById("model-container").appendChild(renderer.domElement);
-
-camera.position.z = 3;
-
-const light = new THREE.HemisphereLight(0xffffff,0x444444,2);
-scene.add(light);
-
-const loader = new THREE.GLTFLoader();
-loader.load(
-  "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
-  function(gltf){
-    const model = gltf.scene;
-    model.scale.set(1.5,1.5,1.5);
-    scene.add(model);
-  }
-);
-
-function animate(){
-  requestAnimationFrame(animate);
-  renderer.render(scene,camera);
-}
-animate();
-
-function closePopup(){
-  document.getElementById("welcomePopup").style.display="none";
-
-  const msg = new SpeechSynthesisUtterance(
-    "Welcome to ORXA. Your intelligent AI assistant is now active."
-  );
-  speechSynthesis.speak(msg);
+function scrollToSection(id){
+document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 </script>
 
