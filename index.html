@@ -45,7 +45,6 @@ nav ul li:hover::after{width:100%;}
 </head>
 
 <body>
-
 <div id="particles-js"></div>
 
 <nav>
@@ -113,17 +112,16 @@ function sendMessage(){
     let text = input.value.trim();
     if(text === "") return;
 
-    // Show user message
     chat.innerHTML += `<p style='color:#00f7ff;'><strong>You:</strong> ${text}</p>`;
     chat.innerHTML += `<p style='color:#ff00ff;'><strong>ORION:</strong> Processing your request...</p>`;
     chat.scrollTop = chat.scrollHeight;
     input.value = "";
 
-    // Call Streamlit backend
-    fetch(`https://mywebsite-gx3uq8q7yeuleyrfzsy3lq.streamlit.app/?query=${encodeURIComponent(text)}`)
+    // Grok AI Streamlit backend
+    const backendURL = "https://mywebsite-gx3uq8q7yeuleyrfzsy3lq.streamlit.app/";
+    fetch(`${backendURL}?query=${encodeURIComponent(text)}`)
     .then(response => response.text())
     .then(data => {
-        // Update ORION response
         chat.innerHTML = chat.innerHTML.replace(
             "<p style='color:#ff00ff;'><strong>ORION:</strong> Processing your request...</p>",
             `<p style='color:#ff00ff;'><strong>ORION:</strong> ${data}</p>`
@@ -143,4 +141,3 @@ function sendMessage(){
 
 </body>
 </html>
-
