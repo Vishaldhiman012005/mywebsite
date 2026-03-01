@@ -80,7 +80,6 @@ box-shadow:0 0 20px rgba(0,255,255,0.4);
 }
 .feature-card h3{margin-bottom:15px;color:#00f7ff;}
 
-/* CONTACT */
 .contact{
 text-align:center;padding:120px 10%;
 background:#050505;
@@ -100,16 +99,61 @@ align-items:center;
 z-index:2000;
 }
 
-.orion-circle{
-width:180px;height:180px;
+/* ADVANCED ORION CORE */
+
+.orion-core{
+position:relative;
+width:220px;
+height:220px;
 border-radius:50%;
-border:3px solid #00f7ff;
-box-shadow:0 0 30px #00f7ff,0 0 60px #00f7ff;
-animation:pulse 2s infinite;
-margin-bottom:30px;
+display:flex;
+justify-content:center;
+align-items:center;
+margin-bottom:40px;
 }
 
-@keyframes pulse{
+.orion-core::before{
+content:"";
+position:absolute;
+width:220px;
+height:220px;
+border-radius:50%;
+border:2px solid #00f7ff;
+animation:rotate 6s linear infinite;
+box-shadow:0 0 25px #00f7ff;
+}
+
+.orion-core::after{
+content:"";
+position:absolute;
+width:160px;
+height:160px;
+border-radius:50%;
+background:radial-gradient(circle,#00f7ff33,#000);
+animation:breath 3s ease-in-out infinite;
+}
+
+.orion-inner{
+width:80px;
+height:80px;
+border-radius:50%;
+background:radial-gradient(circle,#00f7ff,#001f3f);
+box-shadow:0 0 40px #00f7ff,0 0 80px #00f7ff;
+animation:pulseCore 2s infinite;
+}
+
+@keyframes rotate{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+@keyframes breath{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+@keyframes pulseCore{
 0%{box-shadow:0 0 20px #00f7ff;}
 50%{box-shadow:0 0 60px #00f7ff;}
 100%{box-shadow:0 0 20px #00f7ff;}
@@ -194,11 +238,14 @@ font-size:18px;
 <h2>Contact ORXA</h2>
 </section>
 
-<!-- ===== ORION FULL SCREEN MODE ===== -->
-
+<!-- ORION FULL SCREEN -->
 <div id="orionScreen">
 <div id="closeBtn" onclick="closeOrion()">CLOSE ✕</div>
-<div class="orion-circle"></div>
+
+<div class="orion-core">
+<div class="orion-inner"></div>
+</div>
+
 <h2 style="color:#00f7ff;margin-bottom:20px;">I am ORION</h2>
 
 <div id="chatArea"></div>
@@ -234,7 +281,7 @@ let text=input.value.trim();
 if(text==="") return;
 
 chat.innerHTML+=`<p style="color:#00f7ff;"><strong>You:</strong> ${text}</p>`;
-chat.innerHTML+=`<p style="color:#ff00ff;"><strong>ORION:</strong> Processing...</p>`;
+chat.innerHTML+=`<p style="color:#ff00ff;"><strong>ORION:</strong> Processing your request...</p>`;
 chat.scrollTop=chat.scrollHeight;
 input.value="";
 }
