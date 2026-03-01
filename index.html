@@ -89,75 +89,47 @@ nav ul li:hover::after{width:100%;}
 <div id="orionScreen">
 <div id="closeBtn" onclick="closeOrion()">CLOSE ✕</div>
 
-<div class="orion-core">
-<div class="orion-inner"></div>
-</div>
-
+<div class="orion-core"><div class="orion-inner"></div></div>
 <h2 style="color:#00f7ff;margin-bottom:20px;">I am ORION</h2>
-
 <div id="chatArea"></div>
-
-<input id="chatInput" type="text" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter') sendMessage()">
+<input id="chatInput" type="text" placeholder="Ask me anything..." 
+       onkeydown="if(event.key==='Enter') sendMessage()">
 </div>
 
 <script>
-particlesJS("particles-js",{particles:{number:{value:60},color:{value:"#00f7ff"},
-shape:{type:"circle"},opacity:{value:0.5},size:{value:3},
-line_linked:{enable:true,distance:150,color:"#00f7ff",opacity:0.4,width:1},
-move:{enable:true,speed:2}}});
+particlesJS("particles-js",{particles:{number:{value:60},color:{value:"#00f7ff"},shape:{type:"circle"},opacity:{value:0.5},size:{value:3},line_linked:{enable:true,distance:150,color:"#00f7ff",opacity:0.4,width:1},move:{enable:true,speed:2}}});
 
 function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:"smooth"});}
 function openOrion(){
+    const chatArea=document.getElementById("chatArea");
     document.getElementById("orionScreen").style.display="flex";
-    document.getElementById("chatArea").innerHTML="<p style='color:#ff00ff;'><strong>ORION:</strong> How can I assist you today?</p>";
+    chatArea.innerHTML="<p style='color:#ff00ff;'><strong>ORION:</strong> Welcome Vishal!</p>";
 }
 function closeOrion(){document.getElementById("orionScreen").style.display="none";}
 
-// ----- AI Integration -----
-function openOrion(){
-    const chatArea = document.getElementById("chatArea");
-    document.getElementById("orionScreen").style.display="flex";
-    
-    // Welcome message
-    chatArea.innerHTML = "<p style='color:#ff00ff;'><strong>ORION:</strong> Welcome Vishal!</p>";
-}
-
 function sendMessage(){
-    let input = document.getElementById("chatInput");
-    let chat = document.getElementById("chatArea");
-    let text = input.value.trim();
-    if(text === "") return;
+    let input=document.getElementById("chatInput");
+    let chat=document.getElementById("chatArea");
+    let text=input.value.trim();
+    if(text==="") return;
 
-    chat.innerHTML += `<p style='color:#00f7ff;'><strong>You:</strong> ${text}</p>`;
-    chat.innerHTML += `<p style='color:#ff00ff;'><strong>ORION:</strong> Processing your request...</p>`;
-    chat.scrollTop = chat.scrollHeight;
-    input.value = "";
+    chat.innerHTML+=`<p style='color:#00f7ff;'><strong>You:</strong> ${text}</p>`;
+    chat.innerHTML+=`<p style='color:#ff00ff;'><strong>ORION:</strong> Processing your request...</p>`;
+    chat.scrollTop=chat.scrollHeight;
+    input.value="";
 
-    // Connect to backend
-    fetch("https://orion-backend.streamlit.app?query=" + encodeURIComponent(text))
-        .then(response => response.text())
-        .then(data => {
-            chat.innerHTML += `<p style='color:#ff00ff;'><strong>ORION:</strong> ${data}</p>`;
-            chat.scrollTop = chat.scrollHeight;
+    // Backend connection
+    fetch("https://orion-backend.streamlit.app?query="+encodeURIComponent(text))
+        .then(resp=>resp.text())
+        .then(data=>{
+            chat.innerHTML+=`<p style='color:#ff00ff;'><strong>ORION:</strong> ${data}</p>`;
+            chat.scrollTop=chat.scrollHeight;
         })
-        .catch(err => {
-            chat.innerHTML += `<p style='color:red;'><strong>ORION:</strong> Error connecting to server</p>`;
+        .catch(err=>{
+            chat.innerHTML+=`<p style='color:red;'><strong>ORION:</strong> Error connecting to server</p>`;
         });
-}
-        // Replace last "Processing..." line
-        let lines = chat.innerHTML.split("<p style='color:#ff00ff;'><strong>ORION:</strong> Processing...</p>");
-        lines.pop(); 
-        lines.push(`<p style='color:#ff00ff;'><strong>ORION:</strong> ${data.answer}</p>`);
-        chat.innerHTML = lines.join("");
-        chat.scrollTop=chat.scrollHeight;
-
-    } catch(err){
-        chat.innerHTML += `<p style="color:red;"><strong>ORION:</strong> Sorry, something went wrong.</p>`;
-        chat.scrollTop=chat.scrollHeight;
-    }
 }
 </script>
 
 </body>
 </html>
-
