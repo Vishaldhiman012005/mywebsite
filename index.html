@@ -85,7 +85,7 @@ animation:float 4s ease-in-out infinite;opacity:0.7;
 100%{transform:translateY(0px);}
 }
 
-.features,.about{
+.features,.about,.orion{
 padding:120px 40px;
 text-align:center;
 background:#050505;
@@ -93,11 +93,11 @@ opacity:0;
 transform:translateY(60px);
 transition:1s;
 }
-.features.show,.about.show{
+.features.show,.about.show,.orion.show{
 opacity:1;
 transform:translateY(0);
 }
-.features h2,.about h2{color:#00f7ff;margin-bottom:50px;}
+.features h2,.about h2,.orion h2{color:#00f7ff;margin-bottom:50px;}
 
 .feature-grid{
 display:flex;justify-content:center;
@@ -140,6 +140,12 @@ transform:scale(1.05);
 box-shadow:0 0 20px #0096ff;
 }
 
+#chatBox{
+max-width:700px;margin:auto;height:300px;overflow-y:auto;
+background:#111;padding:20px;border-radius:15px;
+border:1px solid rgba(0,255,255,0.2);text-align:left;
+}
+
 #ai-model{
 position:fixed;
 bottom:0;
@@ -160,6 +166,7 @@ z-index:5;
 <ul>
 <li onclick="scrollToSection('home')">Home</li>
 <li onclick="scrollToSection('features')">Features</li>
+<li onclick="scrollToSection('orion')">ORION</li>
 <li onclick="scrollToSection('about')">About</li>
 <li onclick="scrollToSection('contact')">Contact</li>
 </ul>
@@ -192,6 +199,24 @@ z-index:5;
 </div>
 </section>
 
+<!-- ORION SECTION -->
+<section class="orion" id="orion">
+<h2>ORION Core AI</h2>
+<p style="color:#aaa;margin-bottom:40px;">I am ORION. How can I assist you today?</p>
+
+<div id="chatBox"></div>
+
+<div style="max-width:700px;margin:20px auto;display:flex;gap:10px;">
+<input type="text" id="userInput" placeholder="Type your command..."
+style="flex:1;padding:12px;border-radius:8px;border:none;background:#1a1a1a;color:white;">
+<button onclick="sendMessage()" 
+style="padding:12px 25px;border-radius:8px;border:none;
+background:#00f7ff;color:#000;font-weight:bold;cursor:pointer;">
+Send
+</button>
+</div>
+</section>
+
 <section class="about" id="about">
 <h2>About ORXA</h2>
 <p>ORXA is a futuristic AI platform delivering immersive digital experiences.</p>
@@ -210,9 +235,6 @@ z-index:5;
 
 <div id="ai-model"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>
-
 <script>
 particlesJS("particles-js",{particles:{number:{value:60},color:{value:"#00f7ff"},
 shape:{type:"circle"},opacity:{value:0.5},size:{value:3},
@@ -224,45 +246,38 @@ document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
 window.addEventListener("scroll",()=>{
-document.querySelectorAll(".features,.about").forEach(section=>{
+document.querySelectorAll(".features,.about,.orion").forEach(section=>{
 if(section.getBoundingClientRect().top<window.innerHeight-100){
 section.classList.add("show");
 }
 });
 });
 
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(45,300/400,0.1,1000);
-const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
-renderer.setSize(300,400);
-document.getElementById("ai-model").appendChild(renderer.domElement);
+function sendMessage(){
+let input=document.getElementById("userInput");
+let chatBox=document.getElementById("chatBox");
+let message=input.value.trim();
+if(message==="") return;
 
-const light=new THREE.HemisphereLight(0xffffff,0x444444,2);
-scene.add(light);
+chatBox.innerHTML+=`<p style="color:#00f7ff;"><strong>You:</strong> ${message}</p>`;
 
-const dirLight=new THREE.DirectionalLight(0xffffff,1);
-dirLight.position.set(0,1,1);
-scene.add(dirLight);
+let response="Processing your request...";
 
-const loader=new THREE.GLTFLoader();
-loader.load('https://modelviewer.dev/shared-assets/models/Astronaut.glb',
-function(gltf){
-const model=gltf.scene;
-scene.add(model);
-model.scale.set(2,2,2);
-model.position.y=-1;
-
-function animate(){
-requestAnimationFrame(animate);
-model.rotation.y+=0.01;
-renderer.render(scene,camera);
+if(message.toLowerCase().includes("website")){
+response="I can generate a website structure for you. Full AI integration coming soon.";
 }
-animate();
-});
+else if(message.toLowerCase().includes("hello")){
+response="Hello. I am ORION. Ready to assist you.";
+}
+else if(message.toLowerCase().includes("ai")){
+response="AI module activated. Please specify your requirement.";
+}
 
-camera.position.z=5;
+chatBox.innerHTML+=`<p style="color:#ff00ff;"><strong>ORION:</strong> ${response}</p>`;
+chatBox.scrollTop=chatBox.scrollHeight;
+input.value="";
+}
 </script>
 
 </body>
 </html>
-
