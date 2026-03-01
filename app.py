@@ -1,7 +1,9 @@
 # backend/app.py
 import streamlit as st
-import speech_recognition as sr
 import openai
+
+# Page config
+st.set_page_config(page_title="Orion Voice Assistant", layout="centered")
 
 st.title("Orion Voice Assistant")
 
@@ -9,30 +11,29 @@ st.title("Orion Voice Assistant")
 user_name = "Vishal"
 st.write(f"Welcome {user_name}!")
 
-# OpenAI / Groq API key
-openai.api_key = "YOUR_API_KEY_HERE"
+# OpenAI API key
+openai.api_key = "YOUR_API_KEY_HERE"  # <-- yaha apni API key dalna
 
-# Function to call AI model
-def call_groq_model(query):
-    response = openai.ChatCompletion.create(
-        model="llama-3.1-8b-instant",
-        messages=[
-            {"role": "system", "content": "You are Orion, a helpful assistant."},
-            {"role": "user", "content": query}
-        ]
-    )
-    return response['choices'][0]['message']['content']
+# Read query from URL params (Frontend se aayega)
+query_params = st.experimental_get_query_params()
+query = query_params.get("query", [""])[0]
 
-# Voice input button
-if st.button("🎤 Speak Now"):
-    r = sr.Recognizer()
+# Agar query aayi hai
+if query:
     try:
-        with sr.Microphone() as source:
-            st.info("Listening...")
-            audio = r.listen(source)
-            query = r.recognize_google(audio)
-            st.success(f"You said: {query}")
-            response = call_groq_model(query)
-            st.write(response)
+        # Call OpenAI / Llama model
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",  # ya tumhara Llama model
+            messages=[
+                {"role": "system", "content": "You are Orion, a helpful assistant."},
+                {"role": "user", "content": query}
+            ]
+        )
+        # AI ka response
+        st.write(response['choices'][0]['message']['content'])
+
     except Exception as e:
-        st.error("Sorry, could not understand audio")
+        st.write(f"Error: {str(e)}")
+
+else:
+    st.write("No query received. Type something in ORION chat to get response.")
