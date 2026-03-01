@@ -108,28 +108,39 @@ function openOrion(){
 function closeOrion(){document.getElementById("orionScreen").style.display="none";}
 
 function sendMessage(){
-    let input=document.getElementById("chatInput");
-    let chat=document.getElementById("chatArea");
-    let text=input.value.trim();
-    if(text==="") return;
+    let input = document.getElementById("chatInput");
+    let chat = document.getElementById("chatArea");
+    let text = input.value.trim();
+    if(text === "") return;
 
-    chat.innerHTML+=`<p style='color:#00f7ff;'><strong>You:</strong> ${text}</p>`;
-    chat.innerHTML+=`<p style='color:#ff00ff;'><strong>ORION:</strong> Processing your request...</p>`;
-    chat.scrollTop=chat.scrollHeight;
-    input.value="";
+    // Show user message
+    chat.innerHTML += `<p style='color:#00f7ff;'><strong>You:</strong> ${text}</p>`;
+    chat.innerHTML += `<p style='color:#ff00ff;'><strong>ORION:</strong> Processing your request...</p>`;
+    chat.scrollTop = chat.scrollHeight;
+    input.value = "";
 
-    // Backend connection
-    fetch("https://orion-backend.streamlit.app?query="+encodeURIComponent(text))
-        .then(resp=>resp.text())
-        .then(data=>{
-            chat.innerHTML+=`<p style='color:#ff00ff;'><strong>ORION:</strong> ${data}</p>`;
-            chat.scrollTop=chat.scrollHeight;
-        })
-        .catch(err=>{
-            chat.innerHTML+=`<p style='color:red;'><strong>ORION:</strong> Error connecting to server</p>`;
-        });
+    // Call Streamlit backend
+    fetch(`https://mywebsite-gx3uq8q7yeuleyrfzsy3lq.streamlit.app/?query=${encodeURIComponent(text)}`)
+    .then(response => response.text())
+    .then(data => {
+        // Update ORION response
+        chat.innerHTML = chat.innerHTML.replace(
+            "<p style='color:#ff00ff;'><strong>ORION:</strong> Processing your request...</p>",
+            `<p style='color:#ff00ff;'><strong>ORION:</strong> ${data}</p>`
+        );
+        chat.scrollTop = chat.scrollHeight;
+    })
+    .catch(err => {
+        chat.innerHTML = chat.innerHTML.replace(
+            "<p style='color:#ff00ff;'><strong>ORION:</strong> Processing your request...</p>",
+            `<p style='color:red;'><strong>ORION:</strong> Could not connect to server.</p>`
+        );
+        chat.scrollTop = chat.scrollHeight;
+        console.error(err);
+    });
 }
 </script>
 
 </body>
 </html>
+
